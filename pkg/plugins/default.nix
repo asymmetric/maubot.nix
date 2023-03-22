@@ -1,7 +1,6 @@
 { lib
 , stdenvNoCC
 , callPackage
-, fetchFromGitHub
 , maubot
 , python3
 }:
@@ -9,10 +8,10 @@
 let
   # pname: plugin id (example: xyz.maubot.echo)
   # version: plugin version
-  # other attributes are passed directly to stdenv.mkDerivation
-  buildMaubotPlugin = attrs@{ version, pname, ... }: stdenvNoCC.mkDerivation ({
+  # other attributes are passed directly to stdenv.mkDerivation (you at least need src)
+  buildMaubotPlugin = attrs@{ version, pname, nativeBuildInputs ? [ ], ... }: stdenvNoCC.mkDerivation ({
     pluginName = "${pname}-v${version}.mbp";
-    nativeBuildInputs = lib.optionals (attrs?nativeBuildInputs) attrs.nativeBuildInputs ++ [ maubot ];
+    nativeBuildInputs = nativeBuildInputs ++ [ maubot ];
     buildPhase = ''
       runHook preBuild
 
@@ -29,25 +28,31 @@ let
 
       runHook postInstall
     '';
-  } // (builtins.removeAttrs attrs ["genPassthru" "nativeBuildInputs"]));
+  } // (builtins.removeAttrs attrs [ "genPassthru" "nativeBuildInputs" ]));
 
   generated = callPackage ./generated.nix {
     inherit python3;
   };
 
+  # args can be a string (specify the description), an attrset (specify meta),
+  # or an attrset with meta key (specify meta and other attrs)
+  #
+  # meta.changelogFile is a special attr to specify path to changelog file in relation to repo root
   generatedPlugin = name: args:
     let
       entry = generated.${name};
-      meta = if builtins.isString args then {
-        description = args;
-      }
-      else if args?meta then args.meta
-      else args;
-      attrs = if builtins.isAttrs args && args?meta then builtins.removeAttrs args ["meta"] else {};
-    in buildMaubotPlugin (entry // attrs // {
-      meta = entry.meta // meta // (lib.optionalAttrs (meta?changelog) {
-        changelog = "${entry.genPassthru.repoBase}/${args.changelog}";
-      });
+      meta =
+        if builtins.isString args then {
+          description = args;
+        }
+        else if args?meta then args.meta
+        else args;
+      attrs = if builtins.isAttrs args && args?meta then args else { };
+    in
+    buildMaubotPlugin (entry // attrs // {
+      meta = entry.meta // (lib.optionalAttrs (meta?changelogFile) {
+        changelog = "${entry.genPassthru.repoBase}/${meta.changelogFile}";
+      }) // (builtins.removeAttrs meta [ "changelogFile" ]);
     });
 
   generatedPlugins = prefix: builtins.mapAttrs (k: generatedPlugin "${prefix}.${k}");
@@ -74,7 +79,7 @@ let
       arachnitech = generatedPlugins "com.arachnitech" {
         weather = {
           description = "This is a maubot plugin that uses wttr.in to get a simple representation of the weather";
-          changelog = "CHANGELOG.md";
+          changelogFile = "CHANGELOG.md";
         };
       };
       valentinriess = generatedPlugins "com.valentinriess" {
@@ -86,7 +91,7 @@ let
       hyteck = generatedPlugins "de.hyteck" {
         alertbot = {
           description = "A bot that receives a webhook and forwards alerts to a matrix room";
-          changelog = "CHANGELOG.md";
+          changelogFile = "CHANGELOG.md";
         };
       };
       yoxcu = generatedPlugins "de.yoxcu" {
@@ -96,7 +101,8 @@ let
     lomion = generatedPlugins "lomion" {
       tmdb = {
         description = "A maubot to get information about movies from TheMovieDB.org";
-        changelog = "release-note.md";
+        # changelog on releases page is more complete, so don't use release-note.md
+        # changelogFile = "release-note.md";
       };
     };
     me = {
@@ -111,7 +117,7 @@ let
       jasonrobinson = generatedPlugins "me.jasonrobinson" {
         pocket = {
           description = "A maubot plugin that integrates with Pocket";
-          changelog = "CHANGELOG.md";
+          changelogFile = "CHANGELOG.md";
         };
       };
     };
@@ -160,74 +166,23 @@ let
       redactbot = "A maubot that responds to files being posted and redacts/warns all but a set of whitelisted mime types";
     };
   };
+
+  allDerivations = attrs: builtins.concatLists
+    (lib.mapAttrsToList
+      (k: v: if lib.isDerivation v then [ v ] else allDerivations v)
+      attrs);
+
+  recursiveRecurse = builtins.mapAttrs
+    (k: v: if lib.isDerivation v then v else lib.recurseIntoAttrs (recursiveRecurse v));
+
 in
-  {
-    inherit buildMaubotPlugin;
+recursiveRecurse plugins // {
+  inherit buildMaubotPlugin;
 
-    officialPlugins =
-      builtins.filter
-        (x: with plugins.xyz.maubot; x != pingcheck && x != redactbot)
-        (lib.mapAttrsToList (k: v: v) plugins.xyz.maubot);
+  officialPlugins =
+    builtins.filter
+      (x: with plugins.xyz.maubot; x != pingcheck && x != redactbot)
+      (lib.mapAttrsToList (k: v: v) plugins.xyz.maubot);
 
-    allPlugins = builtins.concatLists (map (lib.mapAttrsToList (k: v: v)) [
-      plugins.bzh.abolivier
-      plugins.casavant.jeff
-      plugins.casavant.tom
-      plugins.coffee.maubot
-      plugins.com.arachnitech
-      plugins.com.valentinriess
-      plugins.de.hyteck
-      plugins.de.yoxcu
-      plugins.lomion
-      plugins.me.edwardsdean.maubot
-      plugins.me.gogel.maubot
-      plugins.me.jasonrobinson
-      plugins.org.casavant.jeff
-      plugins.org.jobmachine
-      plugins.pl.rom4nik.maubot
-      plugins.xyz.maubot
-    ]);
-
-    bzh = lib.recurseIntoAttrs {
-      abolivier = lib.recurseIntoAttrs plugins.bzh.abolivier;
-    };
-    casavant = lib.recurseIntoAttrs {
-      jeff = lib.recurseIntoAttrs plugins.casavant.jeff;
-      tom = lib.recurseIntoAttrs plugins.casavant.tom;
-    };
-    coffee = lib.recurseIntoAttrs {
-      maubot = lib.recurseIntoAttrs plugins.coffee.maubot;
-    };
-    com = lib.recurseIntoAttrs {
-      arachnitech = lib.recurseIntoAttrs plugins.com.arachnitech;
-      valentinriess = lib.recurseIntoAttrs plugins.com.valentinriess;
-    };
-    de = lib.recurseIntoAttrs {
-      hyteck = lib.recurseIntoAttrs plugins.de.hyteck;
-      yoxcu = lib.recurseIntoAttrs plugins.de.yoxcu;
-    };
-    lomion = lib.recurseIntoAttrs plugins.lomion;
-    me = lib.recurseIntoAttrs {
-      edwardsdean = lib.recurseIntoAttrs {
-        maubot = lib.recurseIntoAttrs plugins.me.edwardsdean.maubot;
-      };
-      gogel = lib.recurseIntoAttrs {
-        maubot = lib.recurseIntoAttrs plugins.me.gogel.maubot;
-      };
-      jasonrobinson = lib.recurseIntoAttrs plugins.me.jasonrobinson;
-    };
-    org = lib.recurseIntoAttrs {
-      casavant = lib.recurseIntoAttrs {
-        jeff = lib.recurseIntoAttrs plugins.org.casavant.jeff;
-      };
-      jobmachine = lib.recurseIntoAttrs plugins.org.jobmachine;
-    };
-    pl = lib.recurseIntoAttrs {
-      rom4nik = lib.recurseIntoAttrs {
-        maubot = lib.recurseIntoAttrs plugins.rom4nik.maubot;
-      };
-    };
-    xyz = lib.recurseIntoAttrs {
-      maubot = lib.recurseIntoAttrs plugins.xyz.maubot;
-    };
-  }
+  allPlugins = allDerivations plugins;
+}

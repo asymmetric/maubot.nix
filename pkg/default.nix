@@ -96,7 +96,8 @@ let
           unwrapped = self;
           python3 = python;
         };
-      in {
+      in
+      {
         tests = {
           simple = runCommand "${pname}-tests" { } ''
             ${self}/bin/mbc --help > $out

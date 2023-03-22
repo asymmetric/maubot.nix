@@ -598,6 +598,32 @@
   {
     "manifest": {
       "maubot": "0.1.0",
+      "id": "xyz.maubot.redactbot",
+      "version": "2.2.0",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "redactbot"
+      ],
+      "main_class": "RedactBot",
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    },
+    "attrs": {
+      "genPassthru": {
+        "repoBase": "https://gitlab.com/sspaeth/redactbot/-/blob/2bca49b14024844c0aa53b9c4802ef6f8702d99d"
+      }
+    },
+    "gitlab": {
+      "owner": "sspaeth",
+      "repo": "redactbot",
+      "rev": "2bca49b14024844c0aa53b9c4802ef6f8702d99d",
+      "hash": "sha256-uIcXnD3nXVT7mA9SgdyrXGIZuW4CgnCVbCP7TxxnziM="
+    }
+  },
+  {
+    "manifest": {
+      "maubot": "0.1.0",
       "id": "xyz.maubot.pingcheck",
       "version": "0.1.0",
       "license": "MIT",
@@ -623,32 +649,6 @@
       "repo": "maubot-pingcheck",
       "rev": "0.1.0",
       "hash": "sha256-ljNi4si7ZkcCidO5l9jJcgdrj4P8RESB1wznxJvzPNQ="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "xyz.maubot.redactbot",
-      "version": "2.2.0",
-      "license": "AGPL-3.0-or-later",
-      "modules": [
-        "redactbot"
-      ],
-      "main_class": "RedactBot",
-      "extra_files": [
-        "base-config.yaml"
-      ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://gitlab.com/sspaeth/redactbot/-/blob/2bca49b14024844c0aa53b9c4802ef6f8702d99d"
-      }
-    },
-    "gitlab": {
-      "owner": "sspaeth",
-      "repo": "redactbot",
-      "rev": "2bca49b14024844c0aa53b9c4802ef6f8702d99d",
-      "hash": "sha256-uIcXnD3nXVT7mA9SgdyrXGIZuW4CgnCVbCP7TxxnziM="
     }
   },
   {

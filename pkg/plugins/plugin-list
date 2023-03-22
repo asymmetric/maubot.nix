@@ -1,15 +1,15 @@
 # format:
+# gitea:<domain>:<owner>:<repo>
 # github:<owner>:<repo>
-# gitlab:<owner>:<repo>
-# custom-gitlab:<host>:<owner>:<repo>
-# gitea:<host>:<owner>:<repo>
-# gitlab:<owner>:<repo>
+# gitlab:<domain>:<owner>:<repo> (domain can be empty)
+#
+# If a git tag exists, it will be used (sorted by version). Otherwise latest commit is fetched.
 #
 # additionally, you may follow the format with additional args:
-# poetry - derive maubot.yaml from poetry.toml
-# any other arg - the plugin location in relation to repo root
+# poetry.toml - derive maubot.yaml from poetry.toml and build it using a makefile
+# anything else - the plugin root in relation to repo root
 #
-# You might have to extend generated.nix to allow new license names
+# Don't forget to add the plugin to default.nix
 
 # official plugins
 github:maubot:altalias
@@ -36,8 +36,8 @@ github:maubot:xkcd
 
 # unofficial plugins: non-github
 gitea:codeberg.org:lomion:tmdb-bot
-custom-gitlab:edugit.org:nik:maubot-pingcheck
-gitlab:sspaeth:redactbot
+gitlab::sspaeth:redactbot
+gitlab:edugit.org:nik:maubot-pingcheck
 
 # unofficial plugins: github
 github:babolivier:maubot-autoreply
@@ -55,8 +55,8 @@ github:ggogel:YoutubePreviewMaubot
 
 github:jaywink:maubot-pocket
 
-github:jeffcasavant:MaubotTrumpTweet:poetry
-github:jeffcasavant:MaubotTwilio:poetry
+github:jeffcasavant:MaubotTrumpTweet:poetry.toml
+github:jeffcasavant:MaubotTwilio:poetry.toml
 
 github:kellya:maubot-weather
 

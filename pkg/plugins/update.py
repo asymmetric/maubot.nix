@@ -53,7 +53,7 @@ def poetry_to_pep(ver_req: str) -> List[str]:
 script_dir = os.path.dirname(os.path.realpath(__file__))
 plugin_list = filter(lambda s: s, map(lambda s: s.strip(), open(os.path.join(script_dir, 'plugin-list'), 'rt').readlines()))
 
-generated: list = []
+generated: List[dict] = []
 
 for plugin in plugin_list:
     if not plugin or plugin.startswith('#'):
@@ -64,29 +64,30 @@ for plugin in plugin_list:
         'manifest': { },
         'attrs': { },
     }
-    argc = 3
+    argc = None
+    ret_key = None
+    repo = None
+    raw_url = None
+    human_url = None
     if comps[0] == 'break':
         break
-    elif comps[0] == 'custom-gitlab':
+    elif comps[0] == 'gitlab':
         argc = 4
         ret_key = 'gitlab'
         ret[ret_key] = {
-            'domain': comps[1],
             'owner': comps[2],
             'repo': comps[3],
         }
-        repo = f'https://{comps[1]}/{comps[2]}/{comps[3]}.git'
-        raw_url = f'https://{comps[1]}/{comps[2]}/{comps[3]}/-/raw/%COMMIT%'
-        human_url = f'https://{comps[1]}/{comps[2]}/{comps[3]}/-/blob/%COMMIT%'
-    elif comps[0] == 'gitlab':
-        ret_key = 'gitlab'
-        ret[ret_key] = {
-            'owner': comps[1],
-            'repo': comps[2],
-        }
-        repo = f'https://gitlab.com/{comps[1]}/{comps[2]}.git'
-        raw_url = f'https://gitlab.com/{comps[1]}/{comps[2]}/-/raw/%COMMIT%'
-        human_url = f'https://gitlab.com/{comps[1]}/{comps[2]}/-/blob/%COMMIT%'
+
+        domain = comps[1]
+        if domain:
+            ret[ret_key]['domain'] = domain
+        else:
+            domain = 'gitlab.com'
+
+        repo = f'https://{domain}/{comps[2]}/{comps[3]}.git'
+        raw_url = f'https://{domain}/{comps[2]}/{comps[3]}/-/raw/%COMMIT%'
+        human_url = f'https://{domain}/{comps[2]}/{comps[3]}/-/blob/%COMMIT%'
     elif comps[0] == 'gitea':
         argc = 4
         ret_key = 'gitea'
@@ -95,20 +96,24 @@ for plugin in plugin_list:
             'owner': comps[2],
             'repo': comps[3],
         }
+
         repo = f'https://{comps[1]}/{comps[2]}/{comps[3]}.git'
         raw_url = f'https://{comps[1]}/{comps[2]}/{comps[3]}/raw/commit/%COMMIT%'
         human_url = f'https://{comps[1]}/{comps[2]}/{comps[3]}/src/commit/%COMMIT%'
     elif comps[0] == 'github':
+        argc = 3
         ret_key = 'github'
         ret[ret_key] = {
             'owner': comps[1],
             'repo': comps[2],
         }
+
         repo = f'https://github.com/{comps[1]}/{comps[2]}.git'
         raw_url = f'https://raw.githubusercontent.com/{comps[1]}/{comps[2]}/%COMMIT%'
         human_url = f'https://github.com/{comps[1]}/{comps[2]}/blob/%COMMIT%'
     else:
         raise ValueError(f'{comps[0]} plugins not supported!')
+
     refs = {}
     latest_tag = None
     for sha, name in map(lambda ref: ref.split('\t'), git.cmd.Git().ls_remote(repo, refs=True).split('\n')):
@@ -135,7 +140,7 @@ for plugin in plugin_list:
 
     # read metadata
     ret['attrs']['genPassthru'] = { 'repoBase': human_url.replace('%COMMIT%', ref) }
-    if argc < len(comps) and comps[argc] == 'poetry':
+    if argc < len(comps) and comps[argc] == 'poetry.toml':
         ret['attrs']['genPassthru']['isPoetry'] = True
         url = raw_url.replace('%COMMIT%', ref) + '/pyproject.toml'
         data = toml.loads(requests.get(url).text)
