@@ -16,14 +16,16 @@
       maubot = prev.callPackage ./pkg { };
       maubotPlugins = nixpkgs.lib.recurseIntoAttrs final.maubot.plugins;
     };
-    # nixosModules.default = {};
   } // (flake-utils.lib.eachDefaultSystem (system:
-    let pkgs = nixpkgs.legacyPackages.${system}.extend self.overlays.default;
+    let pkgs = (import nixpkgs {
+        inherit system;
+        # config.allowUnfree = true;
+      }).extend self.overlays.default;
     in rec {
       packages.maubot = pkgs.maubot;
       packages.default = packages.maubot;
       devShells.default =
-        let py = pkgs.python3.withPackages (p: with p; [ requests types-requests ruamel-yaml ]);
+        let py = pkgs.python3.withPackages (p: with p; [ gitpython requests types-requests ruamel-yaml toml ]);
       in pkgs.mkShell {
         propagatedBuildInputs = [ py ];
         MYPYPATH = "${py}/${py.sitePackages}";

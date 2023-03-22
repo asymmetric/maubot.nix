@@ -1,6 +1,10 @@
 { lib
 , fetchFromGitHub
+, fetchgit
+, fetchFromGitLab
+, fetchFromGitea
 , python3
+, poetry
 }:
 
 let
@@ -15,33 +19,58 @@ in
     propagatedBuildInputs = map (name:
       let
         inherit (builtins) hasAttr getAttr;
-        packageName = builtins.elemAt (builtins.match "([^=<>]*).*" name) 0;
+        packageName = builtins.elemAt (builtins.match "([^~=<>]*).*" name) 0;
         lower = lib.toLower packageName;
       in
         if hasAttr packageName python3.pkgs then getAttr packageName python3.pkgs
         else if hasAttr lower python3.pkgs then getAttr lower python3.pkgs
         else throw "Dependency ${packageName} not found!"
     ) dependencies;
-  in
-  {
+  in {
     name = manifest.id;
-    value = lib.optionalAttrs (entry?attrs) entry.attrs // {
+    value = entry.attrs // {
       inherit propagatedBuildInputs;
       pname = manifest.id;
       inherit (manifest) version;
       meta = {
         license =
           let
-            spdx = manifest.license;
-          in with lib.licenses;
-            if spdx == "AGPL-3.0-or-later" then agpl3Plus
-            else if spdx == "MIT" then mit
-            else throw "Unknown license ID: ${spdx}";
-      } // (lib.optionalAttrs (entry?github) {
+            spdx = if manifest?license then manifest.license else "unfree";
+            licenses = with lib.licenses; {
+              "AGPL 3.0" = agpl3Only;
+              inherit unfree;
+            };
+            spdxLicenses = lib.listToAttrs (map (v: { name = v.spdxId; value = v; }) (builtins.filter (lib.hasAttr "spdxId") (lib.attrValues lib.licenses)));
+          in
+            if builtins.hasAttr spdx licenses
+            then licenses.${spdx}
+            else spdxLicenses.${spdx};
+      }
+      // (lib.optionalAttrs (entry?github) ({
         homepage = "https://github.com/${entry.github.owner}/${entry.github.repo}";
+      } // (lib.optionalAttrs (lib.hasInfix "." entry.github.rev) rec {
+        downloadPage = "https://github.com/${entry.github.owner}/${entry.github.repo}/releases";
+        changelog = downloadPage;
+      })))
+      // (lib.optionalAttrs (entry?gitlab) {
+        homepage = "https://${if entry.gitlab?domain then entry.gitlab.domain else "gitlab.com"}/${entry.gitlab.owner}/${entry.gitlab.repo}";
       });
       src =
         if entry?github then fetchFromGitHub entry.github
+        else if entry?git then fetchgit entry.git
+        else if entry?gitlab then fetchFromGitLab entry.gitlab
+        else if entry?gitea then fetchFromGitea entry.gitea
         else throw "Invalid generated entry for ${manifest.id}: missing source";
+    }
+    // lib.optionalAttrs (entry.attrs.genPassthru?isPoetry && entry.attrs.genPassthru.isPoetry) {
+      nativeBuildInputs = [
+        poetry
+        (python3.withPackages (p: with p; [ toml ruamel-yaml isort ]))
+      ];
+      preBuild = (if entry?attrs && entry.attrs?preBuild then entry.attrs.preBuild + "\n" else "") + ''
+        export HOME=$(mktemp -d)
+        [[ ! -d scripts ]] || patchShebangs --host scripts
+        make maubot.yaml
+      '';
     };
   }) json)

@@ -14,16 +14,18 @@ let
         name = "${unwrapped.pname}-with-plugins-${unwrapped.version}";
 
         inherit unwrapped;
-        paths = [ unwrapped ] ++ plugins';
-        pythonPath = extraPythonPackages ++ pythonPackages python3.pkgs;
+        paths = plugins';
+        pythonPath = [ unwrapped ] ++ pythonPackages python3.pkgs ++ extraPythonPackages;
 
         nativeBuildInputs = [ python3.pkgs.wrapPython ];
 
         postBuild = ''
-          rm $out/bin/* $out/bin/.*
+          mkdir -p $out/bin
+          rm -f $out/nix-support/propagated-build-inputs
+          rmdir $out/nix-support || true
           cp $unwrapped/bin/.mbc-wrapped $out/bin/mbc
           cp $unwrapped/bin/.maubot-wrapped $out/bin/maubot
-          wrapPythonPrograms
+          wrapPythonProgramsIn "$out/bin" "$pythonPath"
         '';
 
         passthru = {

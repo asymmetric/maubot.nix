@@ -114,6 +114,8 @@ let
         withPlugins = plugins: wrapper { inherit plugins; };
 
         withAllPlugins = self.withPlugins (p: p.allPlugins);
+
+        withAllOfficialPlugins = self.withPlugins (p: p.officialPlugins);
       };
   };
 
