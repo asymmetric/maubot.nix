@@ -92,26 +92,28 @@ let
 
     passthru =
       let
-        wrapper = callPackage ./wrapper.nix { unwrapped = self; };
-      in rec {
+        wrapper = callPackage ./wrapper.nix {
+          unwrapped = self;
+          python3 = python;
+        };
+      in {
         tests = {
           simple = runCommand "${pname}-tests" { } ''
             ${self}/bin/mbc --help > $out
           '';
         };
-        inherit python;
 
         plugins = callPackage ./plugins {
           maubot = self;
           python3 = python;
         };
 
-        withPythonPackages = filter: wrapper { pythonPackages = filter python.pkgs; };
+        withPythonPackages = pythonPackages: wrapper { inherit pythonPackages; };
 
         # This adds the plugins to lib/maubot-plugins
-        withPlugins = filter: wrapper { plugins = filter plugins; };
+        withPlugins = plugins: wrapper { inherit plugins; };
 
-        withAllPlugins = withPlugins (p: p.allPlugins);
+        withAllPlugins = self.withPlugins (p: p.allPlugins);
       };
   };
 

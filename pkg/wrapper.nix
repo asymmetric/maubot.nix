@@ -1,24 +1,23 @@
 { lib
-, callPackage
-, stdenvNoCC
 , symlinkJoin
-, makeWrapper
 , unwrapped
+, python3
 }:
 
 let
-  wrapper = { pythonPackages ? [], plugins ? [] }:
+  wrapper = { pythonPackages ? (_: []), plugins ? (_: []) }:
     let
-      extraPythonPackages = builtins.concatLists (map (p: if  p?propagatedBuildInputs then p.propagatedBuildInputs else []) plugins);
+      plugins' = plugins unwrapped.plugins;
+      extraPythonPackages = builtins.concatLists (map (p: lib.optionals (p?propagatedBuildInputs) p.propagatedBuildInputs) plugins');
     in
       symlinkJoin {
         name = "${unwrapped.pname}-with-plugins-${unwrapped.version}";
 
         inherit unwrapped;
-        paths = [ unwrapped ] ++ plugins;
-        pythonPath = extraPythonPackages ++ pythonPackages;
+        paths = [ unwrapped ] ++ plugins';
+        pythonPath = extraPythonPackages ++ pythonPackages python3.pkgs;
 
-        nativeBuildInputs = [ unwrapped.python.pkgs.wrapPython ];
+        nativeBuildInputs = [ python3.pkgs.wrapPython ];
 
         postBuild = ''
           rm $out/bin/* $out/bin/.*
@@ -30,11 +29,11 @@ let
         passthru = {
           inherit unwrapped;
           withPythonPackages = filter: wrapper {
-            pythonPackages = filter unwrapped.python.pkgs ++ pythonPackages;
+            pythonPackages = pkgs: pythonPackages pkgs ++ filter pkgs;
             inherit plugins;
           };
           withPlugins = filter: wrapper {
-            plugins = filter unwrapped.plugins ++ plugins;
+            plugins = pkgs: plugins pkgs ++ filter pkgs;
             inherit pythonPackages;
           };
         };
