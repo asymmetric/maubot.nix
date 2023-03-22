@@ -90,30 +90,29 @@ let
       maintainers = with maintainers; [ chayleaf ];
     };
 
-    passthru = rec {
-      tests = {
-        simple = runCommand "${pname}-tests" { } ''
-          ${self}/bin/mbc --help > $out
-        '';
+    passthru =
+      let
+        wrapper = callPackage ./wrapper.nix { unwrapped = self; };
+      in rec {
+        tests = {
+          simple = runCommand "${pname}-tests" { } ''
+            ${self}/bin/mbc --help > $out
+          '';
+        };
+        inherit python;
+
+        plugins = callPackage ./plugins {
+          maubot = self;
+          python3 = python;
+        };
+
+        withPythonPackages = filter: wrapper { pythonPackages = filter python.pkgs; };
+
+        # This adds the plugins to lib/maubot-plugins
+        withPlugins = filter: wrapper { plugins = filter plugins; };
+
+        withAllPlugins = withPlugins (p: p.allPlugins);
       };
-      inherit python;
-
-      plugins = callPackage ./plugins.nix {
-        maubot = self;
-        python3 = python;
-      };
-
-      withPythonPackages = filter: pkgs.callPackage ./wrapper.nix {
-        unwrapped = self;
-      } (filter python.pkgs);
-
-      # This doesn't actually load the plugins! It just adds all of plugins' deps
-      withPlugins = filter:
-        let
-          plugins = if builtins.isFunction filter then filter plugins else filter;
-          packages = builtins.concatLists (map (p: if p?propagatedBuildInputs then p.propagatedBuildInputs else []) plugins);
-        in withPythonPackages (_: packages);
-    };
   };
 
 in

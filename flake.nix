@@ -23,7 +23,7 @@
       packages.maubot = pkgs.maubot;
       packages.default = packages.maubot;
       devShells.default =
-        let py = pkgs.python3.withPackages (p: with p; [ requests types-requests ]);
+        let py = pkgs.python3.withPackages (p: with p; [ requests types-requests ruamel-yaml ]);
       in pkgs.mkShell {
         propagatedBuildInputs = [ py ];
         MYPYPATH = "${py}/${py.sitePackages}";
