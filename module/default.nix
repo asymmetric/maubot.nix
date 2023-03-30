@@ -72,6 +72,14 @@ in
           The directory where maubot stores its stateful data.
         '';
       };
+      extraConfigFile = lib.mkOption {
+        type = lib.types.str;
+        default = "./config.yaml";
+        defaultText = lib.literalExpression ''"''${config.services.maubot.dataDir}/config.yaml"'';
+        description = lib.mdDoc ''
+          A file for storing secrets. **Maubot user must have write access to it**. You can pass homeserver registration keys here.
+        '';
+      };
       settings = lib.mkOption {
         default = { };
         description = lib.mdDoc ''
@@ -116,6 +124,7 @@ in
                 upload = mkOption {
                   type = types.str;
                   default = "./plugins";
+                  defaultText = lib.literalExpression ''"''${config.services.maubot.dataDir}/plugins"'';
                   description = lib.mdDoc ''
                     The directory where uploaded new plugins should be stored.
                   '';
@@ -123,6 +132,7 @@ in
                 load = mkOption {
                   type = types.listOf types.str;
                   default = [ "./plugins" ];
+                  defaultText = lib.literalExpression ''[ "''${config.services.maubot.dataDir}/plugins" ]'';
                   description = lib.mdDoc ''
                     The directories from which plugins should be loaded. Duplicate plugin IDs will be moved to the trash.
                   '';
@@ -130,6 +140,7 @@ in
                 trash = mkOption {
                   type = types.str;
                   default = "./trash";
+                  defaultText = lib.literalExpression ''"''${config.services.maubot.dataDir}/trash"'';
                   description = lib.mdDoc ''
                     The directory where old plugin versions and conflicting plugins should be moved. Set to null to delete files immediately.
                   '';
@@ -141,6 +152,7 @@ in
                 sqlite = mkOption {
                   type = types.str;
                   default = "./plugins";
+                  defaultText = lib.literalExpression ''"''${config.services.maubot.dataDir}/plugins"'';
                   description = lib.mdDoc ''
                     The directory where SQLite plugin databases should be stored.
                   '';
@@ -337,5 +349,6 @@ in
     systemd.services.maubot = {
       # TODO
     };
+    # TODO touch extraConfigFile
   };
 }
