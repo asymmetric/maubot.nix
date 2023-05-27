@@ -9,6 +9,13 @@
 let
   python = python3.override {
     packageOverrides = self: super: {
+      aiosqlite = super.aiosqlite.overrideAttrs (old: rec {
+        version = "0.18.0";
+        src = old.src.override {
+          rev = "refs/tags/v${version}";
+          hash = "sha256-yPGSKqjOz1EY5/V0oKz2EiZ90q2O4TINoXdxHuB7Gqk=";
+        };
+      });
       sqlalchemy = super.buildPythonPackage rec {
         pname = "SQLAlchemy";
         version = "1.3.24";
@@ -27,7 +34,7 @@ let
     };
   };
 
-  self = with python.pkgs; buildPythonApplication rec {
+  self = with python.pkgs; buildPythonPackage rec {
     pname = "maubot";
     version = "0.4.1";
     disabled = pythonOlder "3.8";
