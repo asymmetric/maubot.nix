@@ -11,6 +11,8 @@
 #
 # Don't forget to add the plugin to default.nix
 
+# last checked plugin list: https://github.com/maubot/maubot/blob/535b6672a6d940e41063debbf41b8352018f2caf/README.md
+
 # official plugins
 github:maubot:altalias
 github:maubot:commitstrip

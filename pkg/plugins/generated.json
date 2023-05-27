@@ -644,9 +644,9 @@
       }
     },
     "gitlab": {
-      "domain": "edugit.org",
       "owner": "nik",
       "repo": "maubot-pingcheck",
+      "domain": "edugit.org",
       "rev": "0.1.0",
       "hash": "sha256-ljNi4si7ZkcCidO5l9jJcgdrj4P8RESB1wznxJvzPNQ="
     }
@@ -782,25 +782,30 @@
   {
     "manifest": {
       "maubot": "0.1.0",
-      "id": "me.gogel.maubot.redditpreview",
-      "version": "0.0.4",
+      "id": "me.gogel.maubot.socialmediadownload",
+      "version": "1.0.0",
       "license": "MIT",
       "modules": [
-        "redditpreview"
+        "instaloader",
+        "socialmediadownload"
       ],
-      "main_class": "RedditPreviewPlugin",
-      "database": false
+      "main_class": "socialmediadownload/SocialMediaDownloadPlugin",
+      "database": false,
+      "config": true,
+      "extra_files": [
+        "base-config.yaml"
+      ]
     },
     "attrs": {
       "genPassthru": {
-        "repoBase": "https://github.com/ggogel/RedditPreviewMaubot/blob/0.0.4"
+        "repoBase": "https://github.com/ggogel/RedditPreviewMaubot/blob/1.0.0"
       }
     },
     "github": {
       "owner": "ggogel",
       "repo": "RedditPreviewMaubot",
-      "rev": "0.0.4",
-      "hash": "sha256-ES6ZVw7GHRrH1IKc8Wpfp8N9jyPmQiq3EkLh67N5Z3g="
+      "rev": "1.0.0",
+      "hash": "sha256-0jcR36hyG+OIZn5ipS+B3aGVeNhnS/Y4fShoQ2IaPdk="
     }
   },
   {
@@ -996,7 +1001,7 @@
     "manifest": {
       "maubot": "0.1.0",
       "id": "com.arachnitech.weather",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "license": "MIT",
       "modules": [
         "weather"
@@ -1008,14 +1013,14 @@
     },
     "attrs": {
       "genPassthru": {
-        "repoBase": "https://github.com/kellya/maubot-weather/blob/v0.4.0"
+        "repoBase": "https://github.com/kellya/maubot-weather/blob/v0.4.1"
       }
     },
     "github": {
       "owner": "kellya",
       "repo": "maubot-weather",
-      "rev": "v0.4.0",
-      "hash": "sha256-08P8WcpwJjgpmV0LQnkjos5/IAFqBkFWlRKg4FlD3bQ="
+      "rev": "v0.4.1",
+      "hash": "sha256-DHMsemVbiXONeg45IpeaP477fbgkftz5mZdI6OhRHOI="
     }
   },
   {
@@ -1259,7 +1264,7 @@
     "manifest": {
       "maubot": "0.1.0",
       "id": "org.jobmachine.join",
-      "version": "0.2.2",
+      "version": "0.2.3",
       "modules": [
         "join"
       ],
@@ -1271,14 +1276,14 @@
     },
     "attrs": {
       "genPassthru": {
-        "repoBase": "https://github.com/williamkray/maubot-join/blob/4d12f4ae2ea2377bc6a7f5f6c25825729dd48cbc"
+        "repoBase": "https://github.com/williamkray/maubot-join/blob/41dfe34d95c33e54eda65ca176a8cf5fea7ba13b"
       }
     },
     "github": {
       "owner": "williamkray",
       "repo": "maubot-join",
-      "rev": "4d12f4ae2ea2377bc6a7f5f6c25825729dd48cbc",
-      "hash": "sha256-+yeMGvNeZeAiVFONxyApbcC69LmjKD9f6VzKdiSDBGA="
+      "rev": "41dfe34d95c33e54eda65ca176a8cf5fea7ba13b",
+      "hash": "sha256-WUMXtatHUFKSIhKAKHAUDjJMljVmjjTwaPf8K7G+h7Q="
     }
   },
   {

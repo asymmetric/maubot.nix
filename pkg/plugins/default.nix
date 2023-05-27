@@ -110,7 +110,7 @@ let
         metric = "A maubot plugin that will reply to a message with imperial units with the fixed metric units";
       };
       gogel.maubot = generatedPlugins "me.gogel.maubot" {
-        redditpreview = "Maubot plugin that responds to a link of a reddit post with sub name and title. If the post is an image or video, it will upload it to the chat";
+        socialmediadownload = "Maubot plugin that downloads content from various social media websites given a link";
         wolframalpha = "Maubot plugin to search on Wolfram Alpha";
         youtubepreview = "Maubot plugin that responds to a YouTube link with the video title and thumbnail";
       };

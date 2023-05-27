@@ -181,3 +181,4 @@ for plugin in plugin_list:
 
 with open(os.path.join(script_dir, 'generated.json'), 'wt') as file:
     json.dump(generated, file, indent='  ', separators=(',', ': '))
+    file.write('\n')
