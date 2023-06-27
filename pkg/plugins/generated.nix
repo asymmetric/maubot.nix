@@ -47,16 +47,13 @@ builtins.listToAttrs (map
       meta = {
         license =
           let
-            spdx = if manifest?license then manifest.license else "unfree";
+            spdx = manifest.license or "unfree";
             licenses = with lib.licenses; {
               inherit unfree;
               "AGPL 3.0" = agpl3Only;
             };
-            spdxLicenses = lib.listToAttrs (map (v: { name = v.spdxId; value = v; }) (builtins.filter (lib.hasAttr "spdxId") (lib.attrValues lib.licenses)));
-          in
-          if builtins.hasAttr spdx licenses
-          then licenses.${spdx}
-          else spdxLicenses.${spdx};
+            spdxLicenses = builtins.listToAttrs (map (x: lib.nameValuePair x.spdxId x) (builtins.filter (x: x?spdxId) (builtins.attrValues lib.licenses)));
+          in licenses.${spdx} or spdxLicenses.${spdx};
       }
       // (if entry?github then {
         homepage = "https://github.com/${entry.github.owner}/${entry.github.repo}";
@@ -82,12 +79,12 @@ builtins.listToAttrs (map
         else if entry?gitea then fetchFromGitea entry.gitea
         else throw "Invalid generated entry for ${manifest.id}: missing source";
     }
-      // lib.optionalAttrs (entry.attrs.genPassthru?isPoetry && entry.attrs.genPassthru.isPoetry) {
+    // lib.optionalAttrs (entry.attrs.genPassthru.isPoetry or false) {
       nativeBuildInputs = [
         poetry
         (python3.withPackages (p: with p; [ toml ruamel-yaml isort ]))
       ];
-      preBuild = (if entry?attrs && entry.attrs?preBuild then entry.attrs.preBuild + "\n" else "") + ''
+      preBuild = (if entry?attrs.preBuild then entry.attrs.preBuild + "\n" else "") + ''
         export HOME=$(mktemp -d)
         [[ ! -d scripts ]] || patchShebangs --host scripts
         make maubot.yaml

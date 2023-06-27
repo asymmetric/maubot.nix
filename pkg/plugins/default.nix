@@ -3,32 +3,41 @@
 , callPackage
 , maubot
 , python3
+, formats
 }:
 
 let
   # pname: plugin id (example: xyz.maubot.echo)
   # version: plugin version
   # other attributes are passed directly to stdenv.mkDerivation (you at least need src)
-  buildMaubotPlugin = attrs@{ version, pname, nativeBuildInputs ? [ ], ... }: stdenvNoCC.mkDerivation ({
-    pluginName = "${pname}-v${version}.mbp";
-    nativeBuildInputs = nativeBuildInputs ++ [ maubot ];
-    buildPhase = ''
-      runHook preBuild
+  buildMaubotPlugin = attrs@{ version, pname, base_config ? null, ... }:
+    stdenvNoCC.mkDerivation (builtins.removeAttrs attrs [ "base_config" ] // {
+      pluginName = "${pname}-v${version}.mbp";
+      nativeBuildInputs = attrs.nativeBuildInputs or [] ++ [ maubot ];
+      buildPhase = ''
+        runHook preBuild
 
-      mbc build
+        mbc build
 
-      runHook postBuild
-    '';
+        runHook postBuild
+      '';
 
-    installPhase = ''
-      runHook preInstall
+      postPatch = lib.optionalString (base_config != null) ''
+        [ -e base-config.yaml ] || (echo "base-config.yaml doesn't exist, can't override it" && exit 1)
+        cp "${if builtins.isPath base_config || lib.isDerivation base_config then base_config
+          else if builtins.isString base_config then builtins.toFile "base-config.yaml" base_config
+          else (formats.yaml { }).generate "base-config.yaml" base_config}" base-config.yaml
+      '' + attrs.postPatch or "";
 
-      mkdir -p $out/lib/maubot-plugins
-      install -m 444 $pluginName $out/lib/maubot-plugins
+      installPhase = ''
+        runHook preInstall
 
-      runHook postInstall
-    '';
-  } // (builtins.removeAttrs attrs [ "genPassthru" "nativeBuildInputs" ]));
+        mkdir -p $out/lib/maubot-plugins
+        install -m 444 $pluginName $out/lib/maubot-plugins
+
+        runHook postInstall
+      '';
+    });
 
   generated = callPackage ./generated.nix {
     inherit python3;
@@ -47,13 +56,14 @@ let
         }
         else if args?meta then args.meta
         else args;
-      attrs = if builtins.isAttrs args && args?meta then args else { };
+      extraAttrs = if args?meta then args else { };
     in
-    buildMaubotPlugin (entry // attrs // {
-      meta = entry.meta // (lib.optionalAttrs (meta?changelogFile) {
+    # only make base_config overridable for now
+    lib.makeOverridable ({ base_config ? null }: buildMaubotPlugin (builtins.removeAttrs entry [ "genPassthru" ] // extraAttrs // {
+      meta = entry.meta // lib.optionalAttrs (meta?changelogFile) {
         changelog = "${entry.genPassthru.repoBase}/${meta.changelogFile}";
-      }) // (builtins.removeAttrs meta [ "changelogFile" ]);
-    });
+      } // (builtins.removeAttrs meta [ "changelogFile" ]);
+    })) {};
 
   generatedPlugins = prefix: builtins.mapAttrs (k: generatedPlugin "${prefix}.${k}");
 
@@ -81,6 +91,9 @@ let
           description = "This is a maubot plugin that uses wttr.in to get a simple representation of the weather";
           changelogFile = "CHANGELOG.md";
         };
+      };
+      dvdgsng.maubot = generatedPlugins "com.dvdgsng.maubot" {
+        urban = "A maubot to fetch definitions from Urban Dictionary. Returns a specified or random entry.";
       };
       valentinriess = generatedPlugins "com.valentinriess" {
         hasswebhook = "A maubot to get Homeassistant-notifications in your favorite matrix room";
@@ -182,7 +195,7 @@ recursiveRecurse plugins // {
   officialPlugins =
     builtins.filter
       (x: with plugins.xyz.maubot; x != pingcheck && x != redactbot)
-      (lib.mapAttrsToList (k: v: v) plugins.xyz.maubot);
+      (builtins.attrValues plugins.xyz.maubot);
 
   allPlugins = allDerivations plugins;
 }

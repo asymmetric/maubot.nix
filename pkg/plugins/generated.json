@@ -696,7 +696,7 @@
       "genPassthru": {
         "repoBase": "https://github.com/coffeebank/coffee-maubot/blob/7d75c7b4c069ecf4f0c1ba944fb5e235a6143a26"
       },
-      "preBuild": "cd choose"
+      "postPatch": "cd choose"
     },
     "github": {
       "owner": "coffeebank",
@@ -724,7 +724,7 @@
       "genPassthru": {
         "repoBase": "https://github.com/coffeebank/coffee-maubot/blob/7d75c7b4c069ecf4f0c1ba944fb5e235a6143a26"
       },
-      "preBuild": "cd urlpreview"
+      "postPatch": "cd urlpreview"
     },
     "github": {
       "owner": "coffeebank",

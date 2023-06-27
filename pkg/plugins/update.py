@@ -162,7 +162,7 @@ for plugin in plugin_list:
         url = raw_url.replace('%COMMIT%', ref) + '/' + comps[argc] + '/maubot.yaml'
         data = requests.get(url).text
         ret['manifest'] = yaml.load(data)
-        ret['attrs']['preBuild'] = f'cd {comps[argc]}'
+        ret['attrs']['postPatch'] = f'cd {comps[argc]}'
     else:
         url = raw_url.replace('%COMMIT%', ref) + '/maubot.yaml'
         data = requests.get(url).text

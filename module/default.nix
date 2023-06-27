@@ -21,9 +21,8 @@ let
         if cfg.settings.plugin_directories.trash == null
         then "delete"
         else cfg.settings.plugin_directories.trash;
-    } // (lib.optionalAttrs (builtins.length cfg.plugins != 0) {
       load = [ "${finalPackage}/lib/maubot-plugins" ] ++ cfg.settings.plugin_directories.load;
-    });
+    };
     server = cfg.settings.server // {
       override_resource_path =
         if builtins.isNull cfg.settings.server.override_resource_path
@@ -46,7 +45,7 @@ let
 in
 {
   imports = [
-    (lib.mkRemovedOptionModule [ "server" "unshared_secret" ] "Pass this value via extraConfigFile instead")
+    # (lib.mkRemovedOptionModule [ "server" "unshared_secret" ] "Pass this value via extraConfigFile instead")
   ];
   options.services.maubot = with lib; {
     enable = mkEnableOption (mdDoc "maubot");
@@ -55,7 +54,7 @@ in
       default = pkgs.callPackage ../pkg { };
       defaultText = literalExpression "pkgs.maubot";
       description = mdDoc ''
-        Overridable attribute of the maubot package to use.
+        The maubot package to use.
       '';
     };
     plugins = mkOption {
@@ -63,8 +62,8 @@ in
       default = [ ];
       example = literalExpression ''
         with config.services.maubot.package.plugins; [
-          reactbot
-          rss
+          xyz.maubot.reactbot
+          xyz.maubot.rss
         ];
       '';
       description = mdDoc ''
@@ -95,7 +94,14 @@ in
       default = "./config.yaml";
       defaultText = literalExpression ''"''${config.services.maubot.dataDir}/config.yaml"'';
       description = mdDoc ''
-        A file for storing secrets. **Maubot user must have write access to it**. You can pass homeserver registration keys here.
+        A file for storing secrets. **If `extraConfigFileWritable` is not set to true, Maubot user must have write access to it**. You can pass homeserver registration keys here.
+      '';
+    };
+    extraConfigFileWritable = mkOption {
+      type = types.bool;
+      default = false;
+      description = mdDoc ''
+        Whether Maubot should write updated config into `extraConfigFile`. **This will make your Nix module settings have no effect, as extraConfigFile takes precedence over NixOS settings!** It is recommended to keep this off, or enable this for a short time only. Make sure to remove extra config from your file after settings.
       '';
     };
     settings = mkOption {
@@ -309,7 +315,7 @@ in
               version = 1;
               formatters = {
                 colored = {
-                  "()" = "maubot.color_log.ColorFormatter";
+                  "()" = "maubot.lib.color_log.ColorFormatter";
                   format = "[%(asctime)s] [%(levelname)s@%(name)s] %(message)s";
                 };
                 normal = {
@@ -364,30 +370,33 @@ in
           Pass cfg.settings.homeservers secrets via extraConfigFile instead!
         '';
       }*/
-      {
+      /*{
         assertion = cfg.settings.server?public_url;
         message = "You must set config.services.maubot.settings.server.public_url to the public URL of your maubot instance!";
-      }
+      }*/
     ];
     users.users.maubot = {
       group = "maubot";
       home = cfg.dataDir;
       createHome = true;
-      uid = 350; # config.ids.uids.maubot;
+      isSystemUser = true;
+      # uid = 350; # config.ids.uids.maubot;
     };
     users.groups.maubot = {
-      gid = 350; # config.ids.gids.maubot;
+      # gid = 350; # config.ids.gids.maubot;
     };
     systemd.services.maubot = {
       description = "Maubot - a plugin-based Matrix bot system written in Python";
       after = [ "network.target" ] ++ lib.optional hasLocalPostgresDB "postgresql.service";
+      # reasoning: all plugins get disabled if maubot starts before synapse
+      requires = lib.optional config.services.matrix-synapse.enable "matrix-synapse.service";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         User = "maubot";
         Group = "maubot";
         WorkingDirectory = cfg.dataDir;
       };
-      script = "${finalPackage}/bin/maubot --base-config ${configFile} --config ${cfg.extraConfigFile}";
+      script = "${finalPackage}/bin/maubot --base-config ${configFile} --config ${cfg.extraConfigFile}" + lib.optionalString (!cfg.extraConfigFileWritable) " --no-update";
     };
     # TODO touch extraConfigFile?
   };
