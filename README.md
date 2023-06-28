@@ -41,38 +41,38 @@ Instruction:
    packages to make available for Maubot plugins.
 6. Optionally, set `services.maubot.plugins` to a list of Maubot
    plugins:
-   ```
-     services.maubot.plugins = with config.services.maubot.package.plugins; [
-       xyz.maubot.reactbot
-       # This will only change the default config! After you create a
-       # plugin instance, the default config will be copied into that
-       # instance's config in Maubot database, and base config changes
-       # won't be reflected
-       (xyz.maubot.rss.override {
-         base_config = {
-           update_interval = 60;
-           max_backoff = 7200;
-           spam_sleep = 2;
-           command_prefix = "rss";
-           admins = [ "@chayleaf:pavluk.org" ];
-         };
-       })
-     ];
-     # ...or...
-     services.maubot.plugins = config.services.maubot.package.plugins.allOfficialPlugins;
-     # ...or...
-     services.maubot.plugins = with config.services.maubot.package.plugins; [
-       (com.arachnitech.weather.override {
-         # you can pass base_config as a string
-         base_config = ''
-           default_location: New York
-           default_units: M
-           default_language:
-           show_link: true
-           show_image: false
-         '';
-       })
-     ] ++ allOfficialPlugins;
+   ```nix
+   services.maubot.plugins = with config.services.maubot.package.plugins; [
+     xyz.maubot.reactbot
+     # This will only change the default config! After you create a
+     # plugin instance, the default config will be copied into that
+     # instance's config in Maubot database, and base config changes
+     # won't be reflected
+     (xyz.maubot.rss.override {
+       base_config = {
+         update_interval = 60;
+         max_backoff = 7200;
+         spam_sleep = 2;
+         command_prefix = "rss";
+         admins = [ "@chayleaf:pavluk.org" ];
+       };
+     })
+   ];
+   # ...or...
+   services.maubot.plugins = config.services.maubot.package.plugins.allOfficialPlugins;
+   # ...or...
+   services.maubot.plugins = with config.services.maubot.package.plugins; [
+     (com.arachnitech.weather.override {
+       # you can pass base_config as a string
+       base_config = ''
+         default_location: New York
+         default_units: M
+         default_language:
+         show_link: true
+         show_image: false
+       '';
+     })
+   ] ++ allOfficialPlugins;
    ```
 7. Start Maubot at least once before doing the following steps.
 8. To create a user account for logging into Maubot web UI and
