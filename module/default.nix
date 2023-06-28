@@ -94,7 +94,7 @@ in
         ];
       '';
       description = mdDoc ''
-        List of additional Python packages to make available for Maubot.
+        List of additional Python packages to make available for maubot.
       '';
     };
     dataDir = mkOption {
@@ -111,20 +111,20 @@ in
       description = mdDoc ''
         A file for storing secrets. You can pass homeserver registration keys here.
         If it already exists, **it must contain `server.unshared_secret`** which is used for signing API keys.
-        If `extraConfigFileWritable` is not set to true, **Maubot user must have write access to this file**.
+        If `extraConfigFileWritable` is not set to true, **maubot user must have write access to this file**.
       '';
     };
     extraConfigFileWritable = mkOption {
       type = types.bool;
       default = false;
       description = mdDoc ''
-        Whether Maubot should write updated config into `extraConfigFile`. **This will make your Nix module settings have no effect, as extraConfigFile takes precedence over NixOS settings!** It is recommended to keep this off, or enable this for a short time only. Make sure to remove extra config from your file after settings.
+        Whether maubot should write updated config into `extraConfigFile`. **This will make your Nix module settings have no effect, as extraConfigFile takes precedence over NixOS settings!** It is recommended to keep this off, or enable this for a short time only. Make sure to remove extra config from your file after settings.
       '';
     };
     settings = mkOption {
       default = { };
       description = mdDoc ''
-        YAML settings for Maubot. See the
+        YAML settings for maubot. See the
         [example configuration](https://github.com/maubot/maubot/blob/v${cfg.package.version}/maubot/example-config.yaml)
         for more info.
 
@@ -416,7 +416,7 @@ in
       '';
     };
     systemd.services.maubot = {
-      description = "Maubot - a plugin-based Matrix bot system written in Python";
+      description = "maubot - a plugin-based Matrix bot system written in Python";
       after = [ "network.target" ] ++ lib.optional hasLocalPostgresDB "postgresql.service";
       # reasoning: all plugins get disabled if maubot starts before synapse
       requires = lib.optional config.services.matrix-synapse.enable "matrix-synapse.service";

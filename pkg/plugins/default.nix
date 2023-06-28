@@ -73,10 +73,10 @@ let
     };
     casavant = {
       jeff = generatedPlugins "casavant.jeff" {
-        trumptweet = "A plugin for Maubot that generates tweets from Trump";
+        trumptweet = "A plugin for maubot that generates tweets from Trump";
       };
       tom = generatedPlugins "casavant.tom" {
-        giphy = "Generates a gif given a search term, a plugin for Maubot for matrix";
+        giphy = "Generates a gif given a search term, a plugin for maubot for Matrix";
         poll = "A plugin for maubot that creates a poll in a riot room and allows users to vote";
         reddit = "A simple maubot that corrects users when they enter a subreddit without including the entire link";
       };
@@ -96,14 +96,14 @@ let
         urban = "A maubot to fetch definitions from Urban Dictionary. Returns a specified or random entry.";
       };
       valentinriess = generatedPlugins "com.valentinriess" {
-        hasswebhook = "A maubot to get Homeassistant-notifications in your favorite matrix room";
+        hasswebhook = "A maubot to get Homeassistant-notifications in your favorite Matrix room";
         mensa = "A maubot bot for the canteen at Otto-von-Guericke-Universität Magdeburg";
       };
     };
     de = {
       hyteck = generatedPlugins "de.hyteck" {
         alertbot = {
-          description = "A bot that receives a webhook and forwards alerts to a matrix room";
+          description = "A bot that receives a webhook and forwards alerts to a Matrix room";
           changelogFile = "CHANGELOG.md";
         };
       };
@@ -139,7 +139,7 @@ let
         twilio = "Maubot plugin to bridge SMS in with Twilio";
       };
       jobmachine = generatedPlugins "org.jobmachine" {
-        createspaceroom = "Maubot plugin to create a matrix room and include it as part of a matrix space";
+        createspaceroom = "Maubot plugin to create a Matrix room and include it as part of a Matrix space";
         invitebot = "Maubot plugin for generating invite tokens via matrix-registration";
         join = "Maubot plugin to allow specific users to get a bot to join another room";
         kickbot = "Maubot plugin that tracks the last message timestamp of a user across any room that the bot is in, and generates a simple report";
