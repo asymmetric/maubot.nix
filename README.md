@@ -88,7 +88,7 @@ Instruction:
    Where `admin_username` is your username, and `$2b...` is the bcrypted
    password.
 9. Optional: if you want to be able to register new users with the
-   Maubot CLI (`mbc`), and your homeserver is private, add you
+   Maubot CLI (`mbc`), and your homeserver is private, add your
    homeserver's registration key to `/var/lib/maubot/config.yaml`:
 
    ```yaml
