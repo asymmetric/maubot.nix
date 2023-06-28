@@ -192,7 +192,7 @@ in
 recursiveRecurse plugins // {
   inherit buildMaubotPlugin;
 
-  officialPlugins =
+  allOfficialPlugins =
     builtins.filter
       (x: with plugins.xyz.maubot; x != pingcheck && x != redactbot)
       (builtins.attrValues plugins.xyz.maubot);

@@ -33,15 +33,30 @@ let
   };
   configFile = format.generate "config.yaml" finalSettings;
   isPostgresql = db: builtins.isString db && lib.hasPrefix "postgresql://" db;
-  isLocalPostgresDB = db: isPostgresql db && (builtins.any (lib.flip lib.hasInfix db) [
+  isLocalPostgresDB = db: isPostgresql db && (builtins.any (x: lib.hasInfix x db) [
     "@127.0.0.1/"
     "@::1/"
     "@localhost/"
   ]);
-  hasLocalPostgresDB =
-    isLocalPostgresDB cfg.settings.database
-    || isLocalPostgresDB cfg.settings.crypto_database
-    || isLocalPostgresDB cfg.settings.plugin_databases.postgres;
+  parseLocalPostgresDB = db:
+    let
+      noSchema = lib.removePrefix "postgresql://" db;
+      username = builtins.head (lib.splitString "@" noSchema);
+      database = lib.last (lib.splitString "/" noSchema);
+    in
+      if lib.hasInfix ":" username then null else {
+        inherit database username;
+      };
+
+  localPostgresDBs = builtins.filter isLocalPostgresDB [
+    cfg.settings.database
+    cfg.settings.crypto_database
+    cfg.settings.plugin_databases.postgres
+  ];
+
+  parsedLocalPostgresDBs = builtins.filter (x: x != null) (map parseLocalPostgresDB localPostgresDBs);
+
+  hasLocalPostgresDB = localPostgresDBs != [ ];
 in
 {
   imports = [
@@ -51,7 +66,7 @@ in
     enable = mkEnableOption (mdDoc "maubot");
     package = mkOption {
       type = types.package;
-      default = pkgs.callPackage ../pkg { };
+      default = pkgs.pythonPackages.toPythonApplication (pkgs.callPackage ../pkg { });
       defaultText = literalExpression "pkgs.maubot";
       description = mdDoc ''
         The maubot package to use.
@@ -94,7 +109,9 @@ in
       default = "./config.yaml";
       defaultText = literalExpression ''"''${config.services.maubot.dataDir}/config.yaml"'';
       description = mdDoc ''
-        A file for storing secrets. **If `extraConfigFileWritable` is not set to true, Maubot user must have write access to it**. You can pass homeserver registration keys here.
+        A file for storing secrets. You can pass homeserver registration keys here.
+        If it already exists, **it must contain `server.unshared_secret`** which is used for signing API keys.
+        If `extraConfigFileWritable` is not set to true, **Maubot user must have write access to this file**.
       '';
     };
     extraConfigFileWritable = mkOption {
@@ -242,7 +259,10 @@ in
                 };
                 plugin_base_path = mkOption {
                   type = types.str;
-                  default = "/_matrix/maubot/plugin/";
+                  default = "${config.services.maubot.settings.server.ui_base_path}/plugin/";
+                  defaultText = literalExpression ''
+                    "''${config.services.maubot.settings.server.ui_base_path}/plugin/"
+                  '';
                   description = mdDoc ''
                     The base path for plugin endpoints. The instance ID will be appended directly.
                   '';
@@ -358,23 +378,21 @@ in
   };
   config = lib.mkIf cfg.enable {
     assertions = [
-      /*{
+      {
         assertion = hasLocalPostgresDB -> config.services.postgresql.enable;
         message = ''
           Cannot deploy maubot with a configuration for a local postgresql database and a missing postgresql service.
         '';
-      }*/
-      /*{
-        assertion = builtins.all (x: !(x?secret) || x.secret == null) (builtins.attrValues cfg.settings.homeservers);
-        message = ''
-          Pass cfg.settings.homeservers secrets via extraConfigFile instead!
-        '';
-      }*/
-      /*{
-        assertion = cfg.settings.server?public_url;
-        message = "You must set config.services.maubot.settings.server.public_url to the public URL of your maubot instance!";
-      }*/
+      }
     ];
+    services.postgresql = lib.mkIf hasLocalPostgresDB {
+      enable = true;
+      ensureDatabases = map (x: x.database) parsedLocalPostgresDBs;
+      ensureUsers = map ({ username, database }: {
+        name = username;
+        ensurePermissions."DATABASE \"${database}\"" = "ALL PRIVILEGES";
+      }) parsedLocalPostgresDBs;
+    };
     users.users.maubot = {
       group = "maubot";
       home = cfg.dataDir;
@@ -384,6 +402,18 @@ in
     };
     users.groups.maubot = {
       # gid = 350; # config.ids.gids.maubot;
+    };
+    system.userActivationScripts.maubotInit = {
+      text = ''
+        if [[ "$(whoami)" == maubot ]]; then
+          pushd ~
+          if [ ! -f "${cfg.extraConfigFile}" ]; then
+            echo "server:" > "${cfg.extraConfigFile}"
+            echo "    unshared_secret: $(head -c40 /dev/random | base32 | awk '{print tolower($0)}')" > "${cfg.extraConfigFile}"
+          fi
+          popd
+        fi
+      '';
     };
     systemd.services.maubot = {
       description = "Maubot - a plugin-based Matrix bot system written in Python";
