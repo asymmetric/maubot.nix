@@ -13,7 +13,7 @@ let
   buildMaubotPlugin = attrs@{ version, pname, base_config ? null, ... }:
     stdenvNoCC.mkDerivation (builtins.removeAttrs attrs [ "base_config" ] // {
       pluginName = "${pname}-v${version}.mbp";
-      nativeBuildInputs = attrs.nativeBuildInputs or [] ++ [ maubot ];
+      nativeBuildInputs = attrs.nativeBuildInputs or [ ] ++ [ maubot ];
       buildPhase = ''
         runHook preBuild
 
@@ -59,11 +59,13 @@ let
       extraAttrs = if args?meta then args else { };
     in
     # only make base_config overridable for now
-    lib.makeOverridable ({ base_config ? null }: buildMaubotPlugin (builtins.removeAttrs entry [ "genPassthru" ] // extraAttrs // {
-      meta = entry.meta // lib.optionalAttrs (meta?changelogFile) {
-        changelog = "${entry.genPassthru.repoBase}/${meta.changelogFile}";
-      } // (builtins.removeAttrs meta [ "changelogFile" ]);
-    })) {};
+    lib.makeOverridable
+      ({ base_config ? null }: buildMaubotPlugin (builtins.removeAttrs entry [ "genPassthru" ] // extraAttrs // {
+        meta = entry.meta // lib.optionalAttrs (meta?changelogFile) {
+          changelog = "${entry.genPassthru.repoBase}/${meta.changelogFile}";
+        } // (builtins.removeAttrs meta [ "changelogFile" ]);
+      }))
+      { };
 
   generatedPlugins = prefix: builtins.mapAttrs (k: generatedPlugin "${prefix}.${k}");
 

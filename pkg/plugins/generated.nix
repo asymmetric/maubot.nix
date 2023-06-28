@@ -53,7 +53,8 @@ builtins.listToAttrs (map
               "AGPL 3.0" = agpl3Only;
             };
             spdxLicenses = builtins.listToAttrs (map (x: lib.nameValuePair x.spdxId x) (builtins.filter (x: x?spdxId) (builtins.attrValues lib.licenses)));
-          in licenses.${spdx} or spdxLicenses.${spdx};
+          in
+            licenses.${spdx} or spdxLicenses.${spdx};
       }
       // (if entry?github then {
         homepage = "https://github.com/${entry.github.owner}/${entry.github.repo}";
@@ -78,8 +79,7 @@ builtins.listToAttrs (map
         else if entry?gitlab then fetchFromGitLab entry.gitlab
         else if entry?gitea then fetchFromGitea entry.gitea
         else throw "Invalid generated entry for ${manifest.id}: missing source";
-    }
-    // lib.optionalAttrs (entry.attrs.genPassthru.isPoetry or false) {
+    } // lib.optionalAttrs (entry.attrs.genPassthru.isPoetry or false) {
       nativeBuildInputs = [
         poetry
         (python3.withPackages (p: with p; [ toml ruamel-yaml isort ]))

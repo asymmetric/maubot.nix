@@ -8,11 +8,11 @@ let
   cfg = config.services.maubot;
   format = pkgs.formats.yaml { };
   preFinalPackage =
-    if cfg.plugins == []
+    if cfg.plugins == [ ]
     then cfg.package
     else cfg.package.withPlugins (_: cfg.plugins);
   finalPackage =
-    if cfg.pythonPackages == []
+    if cfg.pythonPackages == [ ]
     then preFinalPackage
     else preFinalPackage.withPythonPackages (_: cfg.pythonPackages);
   finalSettings = cfg.settings // {
@@ -44,9 +44,9 @@ let
       username = builtins.head (lib.splitString "@" noSchema);
       database = lib.last (lib.splitString "/" noSchema);
     in
-      if lib.hasInfix ":" username then null else {
-        inherit database username;
-      };
+    if lib.hasInfix ":" username then null else {
+      inherit database username;
+    };
 
   localPostgresDBs = builtins.filter isLocalPostgresDB [
     cfg.settings.database
@@ -225,7 +225,7 @@ in
             };
           };
           server = mkOption {
-            default =  { };
+            default = { };
             type = submodule {
               options = {
                 hostname = mkOption {
@@ -368,7 +368,7 @@ in
               };
               root = {
                 level = "DEBUG";
-                handlers = ["file" "console"];
+                handlers = [ "file" "console" ];
               };
             };
           };
@@ -388,10 +388,12 @@ in
     services.postgresql = lib.mkIf hasLocalPostgresDB {
       enable = true;
       ensureDatabases = map (x: x.database) parsedLocalPostgresDBs;
-      ensureUsers = map ({ username, database }: {
-        name = username;
-        ensurePermissions."DATABASE \"${database}\"" = "ALL PRIVILEGES";
-      }) parsedLocalPostgresDBs;
+      ensureUsers = map
+        ({ username, database }: {
+          name = username;
+          ensurePermissions."DATABASE \"${database}\"" = "ALL PRIVILEGES";
+        })
+        parsedLocalPostgresDBs;
     };
     users.users.maubot = {
       group = "maubot";
