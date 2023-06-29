@@ -4,23 +4,152 @@
 import git
 import json
 import os
-import requests
 import subprocess
 import ruamel.yaml
 import toml
+import zipfile
 
 from typing import List
 
+name_rewrites = {
+    'LDAP/AD inviter bot': 'ldap-ad-inviter-bot',
+}
+
+hostnames = {
+    'git.skeg1.se': 'gitlab',
+    'edugit.org': 'gitlab',
+    'codeberg.org': 'gitea',
+}
+
 yaml = ruamel.yaml.YAML(typ='safe')
 
-def version_newer_than(a_s: str, b_s: str) -> bool:
-    a = a_s.split('.')
-    b = b_s.split('.')
-    while len(a) < len(b):
-        a.append('0')
-    while len(b) < len(a):
-        b.append('0')
-    return a < b
+if not os.path.exists('/tmp/maubot-plugins'):
+    os.makedirs('/tmp/maubot-plugins')
+    git.Repo.clone_from('https://github.com/maubot/plugins.maubot.xyz', '/tmp/maubot-plugins/_repo')
+else:
+    pass # repo = git.Repo('/tmp/maubot-plugins/repo')
+
+repodir = '/tmp/maubot-plugins/_repo'
+
+plugins = {}
+
+def process_repo(path, official):
+    global plugins
+    with open(p, 'rt') as f:
+        data = yaml.load(f)
+    name, repourl, license, desc = data['name'], data['repo'], data['license'], data['description']
+    origurl = repourl
+    if '/' in name:
+        name = os.path.split(p)[-1].removesuffix('.yaml')
+    repodir = f'/tmp/maubot-plugins/{name}'
+    plugindir = repodir
+    if '/tree/' in repourl:
+        repourl, rev_path = repourl.split('/tree/')
+        rev, subdir = rev_path.strip('/').split('/')
+        plugindir = os.path.join(plugindir, subdir)
+    else:
+        rev = None
+        subdir = None
+
+    if repourl.startswith('http:'):
+        repourl = 'https' + repourl[4:]
+    repourl = repourl.rstrip('/')
+    if not os.path.exists(repodir):
+        print('Fetching', name)
+        repo = git.Repo.clone_from(repourl + '.git', repodir)
+    else:
+        repo = git.Repo(repodir)
+    tags = sorted(repo.tags, key=lambda t: t.commit.committed_datetime)
+    tags = list(filter(lambda x: 'rc' not in str(x), tags))
+    if tags:
+        repo.git.checkout(tags[-1])
+        rev = str(tags[-1])
+    else:
+        rev = str(repo.commit('HEAD'))
+    ret = {'attrs':{}}
+    if subdir:
+        ret['attrs']['postPatch'] = f'cd {subdir}'
+    domain, query = repourl.removeprefix('https://').split('/', 1)
+    hash = subprocess.run([
+        'nurl',
+        '--hash',
+        f'file://{repodir}',
+        rev
+    ], capture_output=True, check=True).stdout.decode('utf-8')
+    ret['attrs']['meta'] = {
+        'description': desc,
+        'homepage': origurl,
+    }
+    if domain.endswith('github.com'):
+        owner, repo = query.split('/')
+        ret['github'] = {
+            'owner': owner,
+            'repo': repo,
+            'rev': rev,
+            'hash': hash,
+        }
+        ret['attrs']['meta']['downloadPage'] = f'{repourl}/releases'
+        ret['attrs']['meta']['changelog'] = f'{repourl}/releases'
+        repobase = f'{repourl}/blob/{rev}'
+    elif hostnames.get(domain, 'gitea' if 'gitea.' in domain else None) == 'gitea':
+        owner, repo = query.split('/')
+        ret['gitea'] = {
+            'domain': domain,
+            'owner': owner,
+            'repo': repo,
+            'rev': rev,
+            'hash': hash,
+        }
+        repobase = f'{repourl}/src/commit/{rev}'
+        ret['attrs']['meta']['downloadPage'] = f'{repourl}/releases'
+        ret['attrs']['meta']['changelog'] = f'{repourl}/releases'
+    elif hostnames.get(domain, 'gitlab' if 'gitlab.' in domain else None) == 'gitlab':
+        owner, repo = query.split('/')
+        ret['gitlab'] = {
+            'owner': owner,
+            'repo': repo,
+            'rev': rev,
+            'hash': hash,
+        }
+        if domain != 'gitlab.com':
+            ret['gitlab']['domain'] = domain
+        repobase = f'{repourl}/-/blob/{rev}'
+    else:
+        raise ValueError(f'Is {domain} Gitea or Gitlab, or something else? Please specify in the Python script!')
+    if os.path.exists(os.path.join(plugindir, 'CHANGELOG.md')):
+        ret['attrs']['meta']['changelog'] = f'{repobase}/CHANGELOG.md'
+    if os.path.exists(os.path.join(plugindir, 'maubot.yaml')):
+        with open(os.path.join(plugindir, 'maubot.yaml'), 'rt') as f:
+            ret['manifest'] = yaml.load(f)
+    elif os.path.exists(os.path.join(plugindir, 'pyproject.toml')):
+        ret['isPoetry'] = True
+        with open(os.path.join(plugindir, 'pyproject.toml'), 'rt') as f:
+            data = toml.load(f)
+        deps = []
+        for key, val in data['tool']['poetry'].get('dependencies', {}).items():
+            if key in ['maubot', 'mautrix', 'python']:
+                continue
+            reqs = []
+            for req in val.split(','):
+                reqs.extend(poetry_to_pep(req))
+            deps.append(key + ', '.join(reqs))
+        ret['manifest'] = data['tool']['maubot']
+        ret['manifest']['id'] = data['tool']['poetry']['name']
+        ret['manifest']['version'] = data['tool']['poetry']['version']
+        ret['manifest']['license'] = data['tool']['poetry']['license']
+        if deps:
+            ret['manifest']['dependencies'] = deps
+    else:
+        raise ValueError(f'No maubot.yaml or pyproject.toml found in {repodir}')
+    # normalize non-spdx-conformant licenses this way
+    # (and fill out missing license info)
+    if 'license' not in ret['manifest'] or ret['manifest']['license'] in ['GPLv3', 'AGPL 3.0']:
+        ret['attrs']['meta']['license'] = license
+    elif ret['manifest']['license'] != license:
+        print(f"Warning: licenses for {repourl} don't match! {ret['manifest']['license']} != {license}")
+    if official:
+        ret['isOfficial'] = official
+    plugins[name] = ret
 
 def next_incomp(ver_s: str) -> str:
     ver = ver_s.split('.')
@@ -49,136 +178,15 @@ def poetry_to_pep(ver_req: str) -> List[str]:
         return ['~=' + ver_req[1:]]
     return [ver_req]
 
+for plugin_name in os.listdir(os.path.join(repodir, 'data', 'plugins', 'official')):
+    p = os.path.join(repodir, 'data', 'plugins', 'official', plugin_name)
+    process_repo(p, True)
+
+for plugin_name in os.listdir(os.path.join(repodir, 'data', 'plugins', 'thirdparty')):
+    p = os.path.join(repodir, 'data', 'plugins', 'thirdparty', plugin_name)
+    process_repo(p, False)
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
-plugin_list = filter(lambda s: s, map(lambda s: s.strip(), open(os.path.join(script_dir, 'plugin-list'), 'rt').readlines()))
-
-generated: List[dict] = []
-
-for plugin in plugin_list:
-    if not plugin or plugin.startswith('#'):
-        continue
-    print(f'Updating {plugin}...')
-    comps = plugin.split(':')
-    ret: dict = {
-        'manifest': { },
-        'attrs': { },
-    }
-    argc = None
-    ret_key = None
-    repo = None
-    raw_url = None
-    human_url = None
-    if comps[0] == 'break':
-        break
-    elif comps[0] == 'gitlab':
-        argc = 4
-        ret_key = 'gitlab'
-        ret[ret_key] = {
-            'owner': comps[2],
-            'repo': comps[3],
-        }
-
-        domain = comps[1]
-        if domain:
-            ret[ret_key]['domain'] = domain
-        else:
-            domain = 'gitlab.com'
-
-        repo = f'https://{domain}/{comps[2]}/{comps[3]}.git'
-        raw_url = f'https://{domain}/{comps[2]}/{comps[3]}/-/raw/%COMMIT%'
-        human_url = f'https://{domain}/{comps[2]}/{comps[3]}/-/blob/%COMMIT%'
-    elif comps[0] == 'gitea':
-        argc = 4
-        ret_key = 'gitea'
-        ret[ret_key] = {
-            'domain': comps[1],
-            'owner': comps[2],
-            'repo': comps[3],
-        }
-
-        repo = f'https://{comps[1]}/{comps[2]}/{comps[3]}.git'
-        raw_url = f'https://{comps[1]}/{comps[2]}/{comps[3]}/raw/commit/%COMMIT%'
-        human_url = f'https://{comps[1]}/{comps[2]}/{comps[3]}/src/commit/%COMMIT%'
-    elif comps[0] == 'github':
-        argc = 3
-        ret_key = 'github'
-        ret[ret_key] = {
-            'owner': comps[1],
-            'repo': comps[2],
-        }
-
-        repo = f'https://github.com/{comps[1]}/{comps[2]}.git'
-        raw_url = f'https://raw.githubusercontent.com/{comps[1]}/{comps[2]}/%COMMIT%'
-        human_url = f'https://github.com/{comps[1]}/{comps[2]}/blob/%COMMIT%'
-    else:
-        raise ValueError(f'{comps[0]} plugins not supported!')
-
-    refs = {}
-    latest_tag = None
-    for sha, name in map(lambda ref: ref.split('\t'), git.cmd.Git().ls_remote(repo, refs=True).split('\n')):
-        refs[name] = sha
-        if name.startswith('refs/tags/'):
-            tag = name[10:]
-            if not latest_tag or version_newer_than(latest_tag, tag):
-                latest_tag = tag
-
-    if latest_tag:
-        ret[ret_key]['rev'] = latest_tag
-        if ret_key == 'github':
-            ref = latest_tag
-        else:
-            ref = refs['refs/tags/' + latest_tag]
-    else:
-        ref = None
-        for branch_name in ['master', 'main', 'trunk']:
-            ref = 'refs/heads/' + branch_name
-            if ref in refs.keys():
-                ref = refs[ref]
-                ret[ret_key]['rev'] = ref
-                break
-
-    # read metadata
-    ret['attrs']['genPassthru'] = { 'repoBase': human_url.replace('%COMMIT%', ref) }
-    if argc < len(comps) and comps[argc] == 'poetry.toml':
-        ret['attrs']['genPassthru']['isPoetry'] = True
-        url = raw_url.replace('%COMMIT%', ref) + '/pyproject.toml'
-        data = toml.loads(requests.get(url).text)
-        deps = []
-        for key, val in data['tool']['poetry'].get('dependencies', {}).items():
-            if key in ['maubot', 'mautrix', 'python']:
-                continue
-            reqs = []
-            for req in val.split(','):
-                reqs.extend(poetry_to_pep(req))
-            deps.append(key + ', '.join(reqs))
-        ret['manifest'] = data['tool']['maubot']
-        ret['manifest']['id'] = data['tool']['poetry']['name']
-        ret['manifest']['version'] = data['tool']['poetry']['version']
-        ret['manifest']['license'] = data['tool']['poetry']['license']
-        if deps:
-            ret['manifest']['dependencies'] = deps
-    elif argc < len(comps):
-        url = raw_url.replace('%COMMIT%', ref) + '/' + comps[argc] + '/maubot.yaml'
-        data = requests.get(url).text
-        ret['manifest'] = yaml.load(data)
-        ret['attrs']['postPatch'] = f'cd {comps[argc]}'
-    else:
-        url = raw_url.replace('%COMMIT%', ref) + '/maubot.yaml'
-        data = requests.get(url).text
-        ret['manifest'] = yaml.load(data)
-    
-    assert('id' in ret['manifest'].keys())
-
-    ret[ret_key]['hash'] = subprocess.run([
-        'nurl',
-        '--hash',
-        repo,
-        ret[ret_key]['rev']
-    ], capture_output=True).stdout.decode('utf-8')
-
-    generated.append(ret)
-
 with open(os.path.join(script_dir, 'generated.json'), 'wt') as file:
-    json.dump(generated, file, indent='  ', separators=(',', ': '))
+    json.dump(plugins, file, indent='  ', separators=(',', ': '))
     file.write('\n')

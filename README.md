@@ -40,15 +40,15 @@ Instruction:
 5. Optionally, set `services.maubot.pythonPackages` to a list of python3
    packages to make available for Maubot plugins.
 6. Optionally, set `services.maubot.plugins` to a list of Maubot
-   plugins:
+   plugins (full list available at https://plugins.maubot.xyz/):
    ```nix
    services.maubot.plugins = with config.services.maubot.package.plugins; [
-     xyz.maubot.reactbot
+     reactbot
      # This will only change the default config! After you create a
      # plugin instance, the default config will be copied into that
      # instance's config in Maubot database, and base config changes
      # won't be reflected
-     (xyz.maubot.rss.override {
+     (rss.override {
        base_config = {
          update_interval = 60;
          max_backoff = 7200;
@@ -61,8 +61,10 @@ Instruction:
    # ...or...
    services.maubot.plugins = config.services.maubot.package.plugins.allOfficialPlugins;
    # ...or...
+   services.maubot.plugins = config.services.maubot.package.plugins.allPlugins;
+   # ...or...
    services.maubot.plugins = with config.services.maubot.package.plugins; [
-     (com.arachnitech.weather.override {
+     (weather.override {
        # you can pass base_config as a string
        base_config = ''
          default_location: New York
@@ -97,7 +99,8 @@ Instruction:
            url: https://matrix.example.org
            secret: your-very-secret-key
    ```
-10. You're done! Open https://matrix.example.org/_matrix/maubot, log in
+10. Restart Maubot after editing `/var/lib/maubot/config.yaml`, and
+    you're done! Open https://matrix.example.org/_matrix/maubot, log in
     and start using Maubot! If you want to use `mbc` CLI, use this
     flake's output `packages.${builtins.currentSystem}.maubot`. If you
     want to develop Maubot plugins and need the `maubot` Python module

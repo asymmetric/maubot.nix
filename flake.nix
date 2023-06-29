@@ -50,12 +50,13 @@
         system = "x86_64-linux";
         modules = [
           (import ./module)
-          {
+          ({ pkgs, ... }: {
             system.stateVersion = "23.05";
             fileSystems."/" = { device = "none"; fsType = "tmpfs"; neededForBoot = false; options = [ "defaults" "size=2G" "mode=755" ]; };
             boot.loader.grub.device = "nodev";
             services.maubot.enable = true;
-          }
+            services.maubot.plugins = [ (pkgs.callPackage ./pkg { }).plugins.echo ];
+          })
         ];
       };
       nixosConfigurations.test2 = nixpkgs.lib.nixosSystem {
@@ -79,12 +80,14 @@
         maubot-lib = pkgs.python3Packages.maubot;
       });
       devShells = forEachSystem (pkgs: {
+        # nix shell .#devShells.x86_64-linux.flake
         flake =
           let py = pkgs.python3.withPackages (p: with p; [ gitpython requests types-requests ruamel-yaml toml ]);
           in pkgs.mkShell {
             propagatedBuildInputs = [ py ];
             MYPYPATH = "${py}/${py.sitePackages}";
           };
+        # nix develop
         default =
           let py = pkgs.python3.withPackages (p: [ pkgs.python3Packages.maubot ]);
           in pkgs.mkShell {

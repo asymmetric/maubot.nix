@@ -1,5 +1,19 @@
-[
-  {
+{
+  "altalias": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that lets users publish alternate aliases in rooms.",
+        "homepage": "https://github.com/maubot/altalias",
+        "downloadPage": "https://github.com/maubot/altalias/releases",
+        "changelog": "https://github.com/maubot/altalias/releases"
+      }
+    },
+    "github": {
+      "owner": "maubot",
+      "repo": "altalias",
+      "rev": "b07b7866c9647612bfe784700b37087855432028",
+      "hash": "sha256-+qW3CX2ae86jc5l/7poyLs2cQycLjft9l3rul9eYby4="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.altalias",
@@ -13,19 +27,49 @@
         "base-config.yaml"
       ]
     },
+    "isOfficial": true
+  },
+  "antithread": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/altalias/blob/b07b7866c9647612bfe784700b37087855432028"
+      "meta": {
+        "description": "A bot that redacts all messages in threads.",
+        "homepage": "https://github.com/maubot/antithread",
+        "downloadPage": "https://github.com/maubot/antithread/releases",
+        "changelog": "https://github.com/maubot/antithread/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "altalias",
-      "rev": "b07b7866c9647612bfe784700b37087855432028",
-      "hash": "sha256-+qW3CX2ae86jc5l/7poyLs2cQycLjft9l3rul9eYby4="
-    }
+      "repo": "antithread",
+      "rev": "0577b8eefcf01925452678b9fe380aac4270c672",
+      "hash": "sha256-O6rxvxR62DboRGaNevJRCZynGl3xthRICaxRCvLScdM="
+    },
+    "manifest": {
+      "id": "xyz.maubot.antithread",
+      "version": "1.0.0",
+      "license": "MIT",
+      "modules": [
+        "antithread"
+      ],
+      "main_class": "AntiThreadBot"
+    },
+    "isOfficial": true
   },
-  {
+  "commitstrip": {
+    "attrs": {
+      "meta": {
+        "description": "A bot to view CommitStrips.",
+        "homepage": "https://github.com/maubot/commitstrip",
+        "downloadPage": "https://github.com/maubot/commitstrip/releases",
+        "changelog": "https://github.com/maubot/commitstrip/releases"
+      }
+    },
+    "github": {
+      "owner": "maubot",
+      "repo": "commitstrip",
+      "rev": "28ab63c2725aa989a151f5659cb37a674b002a80",
+      "hash": "sha256-P5u4oDmsMj4r48JZIZ1Cg8cX11aimv9dGI+J0lJrY34="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.commitstrip",
@@ -40,19 +84,23 @@
       ],
       "database": true
     },
+    "isOfficial": true
+  },
+  "dice": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/commitstrip/blob/28ab63c2725aa989a151f5659cb37a674b002a80"
+      "meta": {
+        "description": "A combined dice rolling and calculator bot.",
+        "homepage": "https://github.com/maubot/dice",
+        "downloadPage": "https://github.com/maubot/dice/releases",
+        "changelog": "https://github.com/maubot/dice/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "commitstrip",
-      "rev": "28ab63c2725aa989a151f5659cb37a674b002a80",
-      "hash": "sha256-P5u4oDmsMj4r48JZIZ1Cg8cX11aimv9dGI+J0lJrY34="
-    }
-  },
-  {
+      "repo": "dice",
+      "rev": "v1.1.0",
+      "hash": "sha256-xnqcxOXHhsHR9RjLaOa6QZOx87V6kLQJW+mRWF/S5eM="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.dice",
@@ -66,19 +114,53 @@
         "base-config.yaml"
       ]
     },
+    "isOfficial": true
+  },
+  "disruptor": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/dice/blob/v1.1.0"
+      "meta": {
+        "description": "A bot that disrupts monologues with cat pictures.",
+        "homepage": "https://github.com/maubot/disruptor",
+        "downloadPage": "https://github.com/maubot/disruptor/releases",
+        "changelog": "https://github.com/maubot/disruptor/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "dice",
-      "rev": "v1.1.0",
-      "hash": "sha256-xnqcxOXHhsHR9RjLaOa6QZOx87V6kLQJW+mRWF/S5eM="
-    }
+      "repo": "disruptor",
+      "rev": "v0.2.0",
+      "hash": "sha256-/wm/CNl4XzRBClhW+jOp9S7P/nIz65aOtt+E9AnIPNA="
+    },
+    "manifest": {
+      "maubot": "0.4.1",
+      "id": "xyz.maubot.disruptor",
+      "version": "0.2.0",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "disruptor"
+      ],
+      "main_class": "DisruptorBot",
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    },
+    "isOfficial": true
   },
-  {
+  "echo": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that echoes pings and other stuff.\n\nSee [#ping:maunium.net](https://matrix.to/#/#ping:maunium.net) for a room\nwith lots of echo bots.\n",
+        "homepage": "https://github.com/maubot/echo",
+        "downloadPage": "https://github.com/maubot/echo/releases",
+        "changelog": "https://github.com/maubot/echo/releases"
+      }
+    },
+    "github": {
+      "owner": "maubot",
+      "repo": "echo",
+      "rev": "v1.4.0",
+      "hash": "sha256-/ajDs2vpWqejxDF7naXtKi1nYRs2lJpuc0R0dV7oVHI="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.echo",
@@ -89,19 +171,23 @@
       ],
       "main_class": "EchoBot"
     },
+    "isOfficial": true
+  },
+  "exec": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/echo/blob/v1.4.0"
+      "meta": {
+        "description": "A bot that executes code.",
+        "homepage": "https://github.com/maubot/exec",
+        "downloadPage": "https://github.com/maubot/exec/releases",
+        "changelog": "https://github.com/maubot/exec/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "echo",
-      "rev": "v1.4.0",
-      "hash": "sha256-/ajDs2vpWqejxDF7naXtKi1nYRs2lJpuc0R0dV7oVHI="
-    }
-  },
-  {
+      "repo": "exec",
+      "rev": "475d0fe70dc30e1c14e29028694fd4ac38690932",
+      "hash": "sha256-bwy3eB7ULYTGeJXtTNFMfry9dWQmnTjcU6HWdRznWxc="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.exec",
@@ -115,19 +201,23 @@
         "base-config.yaml"
       ]
     },
+    "isOfficial": true
+  },
+  "factorial": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/exec/blob/475d0fe70dc30e1c14e29028694fd4ac38690932"
+      "meta": {
+        "description": "A bot to calculate unexpected factorials.",
+        "homepage": "https://github.com/maubot/factorial",
+        "downloadPage": "https://github.com/maubot/factorial/releases",
+        "changelog": "https://github.com/maubot/factorial/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "exec",
-      "rev": "475d0fe70dc30e1c14e29028694fd4ac38690932",
-      "hash": "sha256-bwy3eB7ULYTGeJXtTNFMfry9dWQmnTjcU6HWdRznWxc="
-    }
-  },
-  {
+      "repo": "factorial",
+      "rev": "v3.0.0",
+      "hash": "sha256-XHAwAloJZpFdY0kRrUjkEGJoryHK4PSQgBf2QH9C/6o="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.factorial",
@@ -138,19 +228,23 @@
       ],
       "main_class": "FactorialBot"
     },
+    "isOfficial": true
+  },
+  "github": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/factorial/blob/v3.0.0"
+      "meta": {
+        "description": "A GitHub client and webhook receiver.",
+        "homepage": "https://github.com/maubot/github",
+        "downloadPage": "https://github.com/maubot/github/releases",
+        "changelog": "https://github.com/maubot/github/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "factorial",
-      "rev": "v3.0.0",
-      "hash": "sha256-XHAwAloJZpFdY0kRrUjkEGJoryHK4PSQgBf2QH9C/6o="
-    }
-  },
-  {
+      "repo": "github",
+      "rev": "v0.1.2",
+      "hash": "sha256-Qc0KH8iGqMDa+1BXaB5fHtRIcsZRpTF2IufGMEXqV6Q="
+    },
     "manifest": {
       "maubot": "0.3.0",
       "id": "xyz.maubot.github",
@@ -167,19 +261,23 @@
       "webapp": true,
       "config": true
     },
+    "isOfficial": true
+  },
+  "gitlab": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/github/blob/v0.1.2"
+      "meta": {
+        "description": "A GitLab client and webhook receiver.",
+        "homepage": "https://github.com/maubot/gitlab",
+        "downloadPage": "https://github.com/maubot/gitlab/releases",
+        "changelog": "https://github.com/maubot/gitlab/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "github",
-      "rev": "v0.1.2",
-      "hash": "sha256-Qc0KH8iGqMDa+1BXaB5fHtRIcsZRpTF2IufGMEXqV6Q="
-    }
-  },
-  {
+      "repo": "gitlab",
+      "rev": "v0.2.1",
+      "hash": "sha256-lkHGR+uLnT3f7prWDAbJplwzwAyOfMCwf8B2LeiJzIo="
+    },
     "manifest": {
       "maubot": "0.1.2",
       "id": "xyz.maubot.gitlab",
@@ -202,19 +300,23 @@
       "database": true,
       "config": true
     },
+    "isOfficial": true
+  },
+  "karma": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/gitlab/blob/v0.2.1"
+      "meta": {
+        "description": "A user karma tracker bot.",
+        "homepage": "https://github.com/maubot/karma",
+        "downloadPage": "https://github.com/maubot/karma/releases",
+        "changelog": "https://github.com/maubot/karma/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "gitlab",
-      "rev": "v0.2.1",
-      "hash": "sha256-lkHGR+uLnT3f7prWDAbJplwzwAyOfMCwf8B2LeiJzIo="
-    }
-  },
-  {
+      "repo": "karma",
+      "rev": "v1.0.1",
+      "hash": "sha256-7CK4NReLhU/d0FXTWj9eM7C5yL9nXkM+vpPExv4VPfE="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.karma",
@@ -229,19 +331,23 @@
       ],
       "database": true
     },
+    "isOfficial": true
+  },
+  "manhole": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/karma/blob/v1.0.1"
+      "meta": {
+        "description": "A plugin that lets you access a Python shell inside maubot.",
+        "homepage": "https://github.com/maubot/manhole",
+        "downloadPage": "https://github.com/maubot/manhole/releases",
+        "changelog": "https://github.com/maubot/manhole/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "karma",
-      "rev": "v1.0.1",
-      "hash": "sha256-7CK4NReLhU/d0FXTWj9eM7C5yL9nXkM+vpPExv4VPfE="
-    }
-  },
-  {
+      "repo": "manhole",
+      "rev": "47f1f7501b5b353a0fa74bf5929cead559496174",
+      "hash": "sha256-F3Nrl6NOUmwDuBsCxIfopRnLU9rltdaCJL/OcNGzw1Q="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.manhole",
@@ -255,19 +361,23 @@
         "base-config.yaml"
       ]
     },
+    "isOfficial": true
+  },
+  "media": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/manhole/blob/47f1f7501b5b353a0fa74bf5929cead559496174"
+      "meta": {
+        "description": "A bot that replies with the MXC URI of images you send it.",
+        "homepage": "https://github.com/maubot/media",
+        "downloadPage": "https://github.com/maubot/media/releases",
+        "changelog": "https://github.com/maubot/media/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "manhole",
-      "rev": "47f1f7501b5b353a0fa74bf5929cead559496174",
-      "hash": "sha256-F3Nrl6NOUmwDuBsCxIfopRnLU9rltdaCJL/OcNGzw1Q="
-    }
-  },
-  {
+      "repo": "media",
+      "rev": "v1.0.0",
+      "hash": "sha256-00zESMN2WxKYPAQbpyvDpkyJIFkILLOP+m256k0Avzk="
+    },
     "manifest": {
       "id": "xyz.maubot.media",
       "version": "1.0.0",
@@ -277,19 +387,23 @@
       ],
       "main_class": "MediaBot"
     },
+    "isOfficial": true
+  },
+  "reactbot": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/media/blob/v1.0.0"
+      "meta": {
+        "description": "A bot that responds to messages that match predefined rules.",
+        "homepage": "https://github.com/maubot/reactbot",
+        "downloadPage": "https://github.com/maubot/reactbot/releases",
+        "changelog": "https://github.com/maubot/reactbot/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "media",
-      "rev": "v1.0.0",
-      "hash": "sha256-00zESMN2WxKYPAQbpyvDpkyJIFkILLOP+m256k0Avzk="
-    }
-  },
-  {
+      "repo": "reactbot",
+      "rev": "v2.2.0",
+      "hash": "sha256-ARN9zbOFJCVoqz6ooLRm9DDKUZpbQf7KcfsfoOxeeLE="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.reactbot",
@@ -303,19 +417,23 @@
         "base-config.yaml"
       ]
     },
+    "isOfficial": true
+  },
+  "reminder": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/reactbot/blob/v2.2.0"
+      "meta": {
+        "description": "A bot to remind you about things.",
+        "homepage": "https://github.com/maubot/reminder",
+        "downloadPage": "https://github.com/maubot/reminder/releases",
+        "changelog": "https://github.com/maubot/reminder/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "reactbot",
-      "rev": "v2.2.0",
-      "hash": "sha256-ARN9zbOFJCVoqz6ooLRm9DDKUZpbQf7KcfsfoOxeeLE="
-    }
-  },
-  {
+      "repo": "reminder",
+      "rev": "v0.2.2",
+      "hash": "sha256-BCyeWl5xPKvUGWkrnuGh498gKxfhfNZ7oBrsZzpKxkg="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.reminder",
@@ -334,19 +452,23 @@
       ],
       "database": true
     },
+    "isOfficial": true
+  },
+  "rss": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/reminder/blob/v0.2.2"
+      "meta": {
+        "description": "A bot that posts RSS feed updates to Matrix.",
+        "homepage": "https://github.com/maubot/rss",
+        "downloadPage": "https://github.com/maubot/rss/releases",
+        "changelog": "https://github.com/maubot/rss/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "reminder",
-      "rev": "v0.2.2",
-      "hash": "sha256-BCyeWl5xPKvUGWkrnuGh498gKxfhfNZ7oBrsZzpKxkg="
-    }
-  },
-  {
+      "repo": "rss",
+      "rev": "v0.3.2",
+      "hash": "sha256-p/xJpJbzsOeQGcowvOhJSclPtmZyNyBaZBz+mexVqIY="
+    },
     "manifest": {
       "maubot": "0.3.0",
       "id": "xyz.maubot.rss",
@@ -365,19 +487,23 @@
       "database": true,
       "database_type": "asyncpg"
     },
+    "isOfficial": true
+  },
+  "satwcomic": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/rss/blob/v0.3.2"
+      "meta": {
+        "description": "A bot to view SatWComics.",
+        "homepage": "https://github.com/maubot/satwcomic",
+        "downloadPage": "https://github.com/maubot/satwcomic/releases",
+        "changelog": "https://github.com/maubot/satwcomic/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "rss",
-      "rev": "v0.3.2",
-      "hash": "sha256-p/xJpJbzsOeQGcowvOhJSclPtmZyNyBaZBz+mexVqIY="
-    }
-  },
-  {
+      "repo": "satwcomic",
+      "rev": "0241bce4807ce860578e2f4fde76bb043bcebe95",
+      "hash": "sha256-TyXrPUUQdLC0IXbpQquA9eegzDoBm1g2WaeQuqhYPco="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.satwcomic",
@@ -398,19 +524,23 @@
         "Pillow"
       ]
     },
+    "isOfficial": true
+  },
+  "sed": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/satwcomic/blob/0241bce4807ce860578e2f4fde76bb043bcebe95"
+      "meta": {
+        "description": "A bot to do sed-like replacements.",
+        "homepage": "https://github.com/maubot/sed",
+        "downloadPage": "https://github.com/maubot/sed/releases",
+        "changelog": "https://github.com/maubot/sed/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "satwcomic",
-      "rev": "0241bce4807ce860578e2f4fde76bb043bcebe95",
-      "hash": "sha256-TyXrPUUQdLC0IXbpQquA9eegzDoBm1g2WaeQuqhYPco="
-    }
-  },
-  {
+      "repo": "sed",
+      "rev": "v1.1.0",
+      "hash": "sha256-raVUYEEuNHDFEE+b/yb8DyokFOrbVn0miul+2tJbR+s="
+    },
     "manifest": {
       "id": "xyz.maubot.sed",
       "version": "1.1.0",
@@ -420,19 +550,23 @@
       ],
       "main_class": "SedBot"
     },
+    "isOfficial": true
+  },
+  "songwhip": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/sed/blob/v1.1.0"
+      "meta": {
+        "description": "A bot to post Songwhip links.",
+        "homepage": "https://github.com/maubot/songwhip",
+        "downloadPage": "https://github.com/maubot/songwhip/releases",
+        "changelog": "https://github.com/maubot/songwhip/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "sed",
-      "rev": "v1.1.0",
-      "hash": "sha256-raVUYEEuNHDFEE+b/yb8DyokFOrbVn0miul+2tJbR+s="
-    }
-  },
-  {
+      "repo": "songwhip",
+      "rev": "68d5226b19b983f7ef0e2452c3c1be93a8b5c23b",
+      "hash": "sha256-gA4anzN5Qifam+8fPDb7avo1kBZW4x81ckJB3b7Cia0="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.songwhip",
@@ -443,19 +577,23 @@
       ],
       "main_class": "SongwhipBot"
     },
+    "isOfficial": true
+  },
+  "supportportal": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/songwhip/blob/68d5226b19b983f7ef0e2452c3c1be93a8b5c23b"
+      "meta": {
+        "description": "A bot to manage customer support on Matrix.",
+        "homepage": "https://github.com/maubot/supportportal",
+        "downloadPage": "https://github.com/maubot/supportportal/releases",
+        "changelog": "https://github.com/maubot/supportportal/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "songwhip",
-      "rev": "68d5226b19b983f7ef0e2452c3c1be93a8b5c23b",
-      "hash": "sha256-gA4anzN5Qifam+8fPDb7avo1kBZW4x81ckJB3b7Cia0="
-    }
-  },
-  {
+      "repo": "supportportal",
+      "rev": "v0.1.0",
+      "hash": "sha256-9CmA9KfkOkzqTycAGE8jaZuDwS7IvFwWGUer3iR8ooM="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.supportportal",
@@ -471,19 +609,23 @@
         "base-config.yaml"
       ]
     },
+    "isOfficial": true
+  },
+  "tex": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/supportportal/blob/v0.1.0"
+      "meta": {
+        "description": "A bot that renders LaTeX.",
+        "homepage": "https://github.com/maubot/tex",
+        "downloadPage": "https://github.com/maubot/tex/releases",
+        "changelog": "https://github.com/maubot/tex/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "supportportal",
-      "rev": "v0.1.0",
-      "hash": "sha256-9CmA9KfkOkzqTycAGE8jaZuDwS7IvFwWGUer3iR8ooM="
-    }
-  },
-  {
+      "repo": "tex",
+      "rev": "a6617da41409b5fc5960dc8de06046bbac091318",
+      "hash": "sha256-6Iq/rOiMQiFtKvAYeYuF+2xXVcR7VIxQTejbpYBpy2A="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.tex",
@@ -501,19 +643,23 @@
         "Pillow"
       ]
     },
+    "isOfficial": true
+  },
+  "translate": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/tex/blob/a6617da41409b5fc5960dc8de06046bbac091318"
+      "meta": {
+        "description": "A bot to translate words.",
+        "homepage": "https://github.com/maubot/translate",
+        "downloadPage": "https://github.com/maubot/translate/releases",
+        "changelog": "https://github.com/maubot/translate/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "tex",
-      "rev": "a6617da41409b5fc5960dc8de06046bbac091318",
-      "hash": "sha256-6Iq/rOiMQiFtKvAYeYuF+2xXVcR7VIxQTejbpYBpy2A="
-    }
-  },
-  {
+      "repo": "translate",
+      "rev": "v0.1.0",
+      "hash": "sha256-eaiTNjnBa0r2zeCzYZH/k04dGftBSGuGaDvwOGKKZDA="
+    },
     "manifest": {
       "id": "xyz.maubot.translate",
       "version": "0.1.0",
@@ -526,19 +672,23 @@
         "base-config.yaml"
       ]
     },
+    "isOfficial": true
+  },
+  "xkcd": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/translate/blob/v0.1.0"
+      "meta": {
+        "description": "A bot to view xkcd comics.",
+        "homepage": "https://github.com/maubot/xkcd",
+        "downloadPage": "https://github.com/maubot/xkcd/releases",
+        "changelog": "https://github.com/maubot/xkcd/releases"
       }
     },
     "github": {
       "owner": "maubot",
-      "repo": "translate",
-      "rev": "v0.1.0",
-      "hash": "sha256-eaiTNjnBa0r2zeCzYZH/k04dGftBSGuGaDvwOGKKZDA="
-    }
-  },
-  {
+      "repo": "xkcd",
+      "rev": "v1.2.0",
+      "hash": "sha256-dtst/QuIZrMjk5RdbXjTksCbGwf8HCBsECDWtp70W1U="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.xkcd",
@@ -558,100 +708,106 @@
       "database": true,
       "config": true
     },
+    "isOfficial": true
+  },
+  "activity-tracker": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/maubot/xkcd/blob/v1.2.0"
+      "meta": {
+        "description": "A plugin that minimally tracks user activity within a space. Useful for kicking inactive users from a private community.",
+        "homepage": "https://github.com/williamkray/maubot-kickbot",
+        "downloadPage": "https://github.com/williamkray/maubot-kickbot/releases",
+        "changelog": "https://github.com/williamkray/maubot-kickbot/releases",
+        "license": "MIT"
       }
     },
     "github": {
-      "owner": "maubot",
-      "repo": "xkcd",
-      "rev": "v1.2.0",
-      "hash": "sha256-dtst/QuIZrMjk5RdbXjTksCbGwf8HCBsECDWtp70W1U="
-    }
-  },
-  {
+      "owner": "williamkray",
+      "repo": "maubot-kickbot",
+      "rev": "804332f78ba96b89b95e8c86d6a65745c2b9e04a",
+      "hash": "sha256-p6TZWo2xgBqOo2m5MoH8PYhYjwCPu+qxtKL+zYwRy9U="
+    },
     "manifest": {
       "maubot": "0.1.0",
-      "id": "lomion.tmdb",
-      "version": "1.3.0",
-      "license": "AGPL 3.0",
+      "id": "org.jobmachine.kickbot",
+      "version": "0.0.9",
       "modules": [
-        "tmdb"
+        "kickbot"
       ],
-      "main_class": "TmdbBot",
-      "database": true
-    },
+      "main_class": "KickBot",
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "database": true,
+      "database_type": "asyncpg"
+    }
+  },
+  "alertbot": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://codeberg.org/lomion/tmdb-bot/src/commit/95759155be9c6513ce403f2172976e0eff3e247b"
+      "meta": {
+        "description": "A bot that recives monitoring alerts via alertmanager and forwards them to a matrix room.",
+        "homepage": "https://github.com/moan0s/alertbot",
+        "downloadPage": "https://github.com/moan0s/alertbot/releases",
+        "changelog": "https://github.com/moan0s/alertbot/blob/v1.1.1/CHANGELOG.md"
       }
     },
-    "gitea": {
-      "domain": "codeberg.org",
-      "owner": "lomion",
-      "repo": "tmdb-bot",
-      "rev": "rel.1.3.0",
-      "hash": "sha256-QeKpIukLCeJOxi/+H+Hukf7mA38gvf8q37o4FOuigAU="
-    }
-  },
-  {
+    "github": {
+      "owner": "moan0s",
+      "repo": "alertbot",
+      "rev": "v1.1.1",
+      "hash": "sha256-hA4Wl1mrIuThQVHTPhMAVsvdbhhx/rHqpOResWO8xiI="
+    },
     "manifest": {
       "maubot": "0.1.0",
-      "id": "xyz.maubot.redactbot",
-      "version": "2.2.0",
+      "id": "de.hyteck.alertbot",
+      "version": "1.1.1",
       "license": "AGPL-3.0-or-later",
       "modules": [
-        "redactbot"
+        "alertbot"
       ],
-      "main_class": "RedactBot",
-      "extra_files": [
-        "base-config.yaml"
-      ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://gitlab.com/sspaeth/redactbot/-/blob/2bca49b14024844c0aa53b9c4802ef6f8702d99d"
-      }
-    },
-    "gitlab": {
-      "owner": "sspaeth",
-      "repo": "redactbot",
-      "rev": "2bca49b14024844c0aa53b9c4802ef6f8702d99d",
-      "hash": "sha256-uIcXnD3nXVT7mA9SgdyrXGIZuW4CgnCVbCP7TxxnziM="
+      "main_class": "AlertBot",
+      "webapp": true
     }
   },
-  {
+  "alternatingcaps": {
+    "attrs": {
+      "meta": {
+        "description": "A bot repeating last message using aLtErNaTiNg cApS.",
+        "homepage": "https://github.com/rom4nik/maubot-alternatingcaps",
+        "downloadPage": "https://github.com/rom4nik/maubot-alternatingcaps/releases",
+        "changelog": "https://github.com/rom4nik/maubot-alternatingcaps/releases"
+      }
+    },
+    "github": {
+      "owner": "rom4nik",
+      "repo": "maubot-alternatingcaps",
+      "rev": "v0.1.1",
+      "hash": "sha256-fxrnJjmJ+wmJIDFY1FQn2n2NcrG3nx3ko5AmxloJS98="
+    },
     "manifest": {
-      "maubot": "0.1.0",
-      "id": "xyz.maubot.pingcheck",
-      "version": "0.1.0",
+      "id": "pl.rom4nik.maubot.alternatingcaps",
+      "version": "0.1.1",
       "license": "MIT",
       "modules": [
-        "pingcheck"
+        "alternatingcaps"
       ],
-      "main_class": "PingcheckBot",
-      "dependencie": [
-        "requests"
-      ],
-      "extra_files": [
-        "base-config.yaml"
-      ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://edugit.org/nik/maubot-pingcheck/-/blob/8f49894029c0d77c0abf99c4330760364dec3c3e"
-      }
-    },
-    "gitlab": {
-      "owner": "nik",
-      "repo": "maubot-pingcheck",
-      "domain": "edugit.org",
-      "rev": "0.1.0",
-      "hash": "sha256-ljNi4si7ZkcCidO5l9jJcgdrj4P8RESB1wznxJvzPNQ="
+      "main_class": "AlternatingCaps"
     }
   },
-  {
+  "autoreply": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that sends automated replies when you're away, and shows you a summary of missed messages when you come back.",
+        "homepage": "https://github.com/babolivier/maubot-autoreply",
+        "downloadPage": "https://github.com/babolivier/maubot-autoreply/releases",
+        "changelog": "https://github.com/babolivier/maubot-autoreply/releases"
+      }
+    },
+    "github": {
+      "owner": "babolivier",
+      "repo": "maubot-autoreply",
+      "rev": "v1.0.0",
+      "hash": "sha256-ULOL5C1tzH4g0IWu+GmMdl3+aCZK0n/G4I8wIvd7f6U="
+    },
     "manifest": {
       "maubot": "v0.1.0",
       "id": "bzh.abolivier.autoreply",
@@ -667,95 +823,340 @@
       ],
       "database": true,
       "database_type": "asyncpg"
-    },
+    }
+  },
+  "chatgpt": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/babolivier/maubot-autoreply/blob/v1.0.0"
+      "meta": {
+        "description": "ChatGPT plugin for maubot. Multi-user aware for use in group rooms! Customize your prompts to \"train\" your assistant contextually.",
+        "homepage": "https://github.com/williamkray/maubot-chatgpt",
+        "downloadPage": "https://github.com/williamkray/maubot-chatgpt/releases",
+        "changelog": "https://github.com/williamkray/maubot-chatgpt/releases",
+        "license": "MIT"
       }
     },
     "github": {
-      "owner": "babolivier",
-      "repo": "maubot-autoreply",
-      "rev": "v1.0.0",
-      "hash": "sha256-ULOL5C1tzH4g0IWu+GmMdl3+aCZK0n/G4I8wIvd7f6U="
-    }
-  },
-  {
+      "owner": "williamkray",
+      "repo": "maubot-chatgpt",
+      "rev": "26898910943228ef8428fdb6e19556c3474ba68e",
+      "hash": "sha256-L00fXoXgVVZo0mcim5BTk3kNh++3e5bDhJJTXU93/M4="
+    },
     "manifest": {
       "maubot": "0.1.0",
-      "id": "coffee.maubot.choose",
-      "version": "0.1.0.3",
-      "license": "AGPL-3.0-or-later",
+      "id": "org.jobmachine.chatgpt",
+      "version": "0.0.6",
       "modules": [
-        "choose"
+        "gpt"
       ],
-      "main_class": "ChooseBot",
+      "main_class": "GPTPlugin",
+      "config": true,
+      "extra_files": [
+        "base-config.yaml"
+      ],
       "database": false
-    },
+    }
+  },
+  "create-room": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/coffeebank/coffee-maubot/blob/7d75c7b4c069ecf4f0c1ba944fb5e235a6143a26"
-      },
-      "postPatch": "cd choose"
+      "meta": {
+        "description": "A plugin that creates new rooms and automatically sets them to be part of a private Matrix Space.",
+        "homepage": "https://github.com/williamkray/maubot-createroom",
+        "downloadPage": "https://github.com/williamkray/maubot-createroom/releases",
+        "changelog": "https://github.com/williamkray/maubot-createroom/releases",
+        "license": "MIT"
+      }
     },
     "github": {
-      "owner": "coffeebank",
-      "repo": "coffee-maubot",
-      "rev": "7d75c7b4c069ecf4f0c1ba944fb5e235a6143a26",
-      "hash": "sha256-dFRt+v5sSuuAW60oLvm1WfdcraQYzkYUH6iJciGTiwI="
-    }
-  },
-  {
+      "owner": "williamkray",
+      "repo": "maubot-createroom",
+      "rev": "4ed9ecf3da25b39b910695b12f461db23fcd7faf",
+      "hash": "sha256-semP+9x+29aEAgOKqgaMChyMGhL98QROHLlzS+z1Oqw="
+    },
     "manifest": {
       "maubot": "0.1.0",
-      "id": "coffee.maubot.urlpreview",
-      "version": "0.1.0.35",
-      "license": "AGPL-3.0-or-later",
+      "id": "org.jobmachine.createspaceroom",
+      "version": "0.1.2",
       "modules": [
-        "urlpreview"
+        "createspaceroom"
       ],
-      "main_class": "UrlpreviewBot",
+      "main_class": "CreateSpaceRoom",
+      "config": true,
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "database": false
+    }
+  },
+  "gifme": {
+    "attrs": {
+      "meta": {
+        "description": "Superior gif responses. Save your own library of image or video responses. \nAllows fallback behavior to Giphy or Tenor, optionally saves quotes from\nusers for comedic effect or to be used as an FAQ bot!\n",
+        "homepage": "https://github.com/williamkray/maubot-gifme",
+        "downloadPage": "https://github.com/williamkray/maubot-gifme/releases",
+        "changelog": "https://github.com/williamkray/maubot-gifme/releases",
+        "license": "MIT"
+      }
+    },
+    "github": {
+      "owner": "williamkray",
+      "repo": "maubot-gifme",
+      "rev": "41dea3d57167bd8b79a638a1291f8450ecb14007",
+      "hash": "sha256-IQws1TooatPtIIwkcrDhidSg6zk4nJ8mHBHymNyxWxQ="
+    },
+    "manifest": {
+      "maubot": "0.4.0",
+      "id": "org.jobmachine.gifme",
+      "version": "0.1.0",
+      "modules": [
+        "gifme"
+      ],
+      "main_class": "GifMe",
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "database": true,
+      "database_type": "asyncpg"
+    }
+  },
+  "giphy": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that generates a gif (from giphy) given search terms.",
+        "homepage": "https://github.com/TomCasavant/GiphyMaubot",
+        "downloadPage": "https://github.com/TomCasavant/GiphyMaubot/releases",
+        "changelog": "https://github.com/TomCasavant/GiphyMaubot/releases"
+      }
+    },
+    "github": {
+      "owner": "TomCasavant",
+      "repo": "GiphyMaubot",
+      "rev": "3.2.0",
+      "hash": "sha256-63LPt+L20zKYsbqyyJ5lFeqNCMrv5PU3txfuyPvrYV8="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "casavant.tom.giphy",
+      "version": "3.2.0",
+      "license": "MIT",
+      "modules": [
+        "giphy"
+      ],
+      "main_class": "GiphyPlugin",
       "database": false,
       "extra_files": [
         "base-config.yaml"
       ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/coffeebank/coffee-maubot/blob/7d75c7b4c069ecf4f0c1ba944fb5e235a6143a26"
-      },
-      "postPatch": "cd urlpreview"
-    },
-    "github": {
-      "owner": "coffeebank",
-      "repo": "coffee-maubot",
-      "rev": "7d75c7b4c069ecf4f0c1ba944fb5e235a6143a26",
-      "hash": "sha256-dFRt+v5sSuuAW60oLvm1WfdcraQYzkYUH6iJciGTiwI="
     }
   },
-  {
-    "manifest": {
-      "id": "com.dvdgsng.maubot.urban",
-      "version": "1.0.2",
-      "license": "AGPL-3.0-or-later",
-      "modules": [
-        "urban"
-      ],
-      "main_class": "UrbanDictBot"
-    },
+  "hasswebhookbot": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/dvdgsng/UrbanMaubot/blob/1.0.2"
+      "meta": {
+        "description": "A bot receiving webhooks from [Home Assistant](https://github.com/home-assistant).",
+        "homepage": "https://github.com/v411e/hasswebhookbot",
+        "downloadPage": "https://github.com/v411e/hasswebhookbot/releases",
+        "changelog": "https://github.com/v411e/hasswebhookbot/releases"
       }
     },
     "github": {
-      "owner": "dvdgsng",
-      "repo": "UrbanMaubot",
-      "rev": "1.0.2",
-      "hash": "sha256-JQ2PpsH/Nno7XqcF1HpZHM/Qv/gta/xGPjfIKtY+pxM="
+      "owner": "v411e",
+      "repo": "hasswebhookbot",
+      "rev": "v0.0.15",
+      "hash": "sha256-Tjr2sbFMpasBy4dR1Lqxt/jnO3ay26XY2d263JkFyKg="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "com.valentinriess.hasswebhook",
+      "version": "0.0.15",
+      "license": "MIT",
+      "modules": [
+        "hasswebhook"
+      ],
+      "main_class": "HassWebhook",
+      "config": true,
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "database": true,
+      "webapp": true,
+      "soft_dependencies": [
+        "Pillow"
+      ],
+      "dependencies": [
+        "Markdown",
+        "pytz"
+      ]
     }
   },
-  {
+  "help": {
+    "attrs": {
+      "meta": {
+        "description": "A plugin to add a `!help` command to maubot. Returns all built-in help commands for all plugins loaded in the client instance.",
+        "homepage": "https://git.skeg1.se/vondassendorf/maubot_mauhelp"
+      }
+    },
+    "gitlab": {
+      "owner": "vondassendorf",
+      "repo": "maubot_mauhelp",
+      "rev": "v0.2.0",
+      "hash": "sha256-xQ0GzdWPHstMSEOXwmW/DFxClK/oEwfyTrm752S5iFQ=",
+      "domain": "git.skeg1.se"
+    },
+    "manifest": {
+      "maubot": "0.3.1",
+      "id": "se.skeg1.mauhelp",
+      "version": "0.2.0",
+      "license": "MIT",
+      "modules": [
+        "mauhelp"
+      ],
+      "main_class": "MauHelp",
+      "database": false
+    }
+  },
+  "holopin": {
+    "attrs": {
+      "meta": {
+        "description": "A plugin to issue [Holopin](https://holopin.io) badges to users.",
+        "homepage": "https://github.com/itrich/HolopinMaubot",
+        "downloadPage": "https://github.com/itrich/HolopinMaubot/releases",
+        "changelog": "https://github.com/itrich/HolopinMaubot/releases"
+      }
+    },
+    "github": {
+      "owner": "itrich",
+      "repo": "HolopinMaubot",
+      "rev": "v0.0.1",
+      "hash": "sha256-fQDa4e2hN5WFXwPVqefCU9YBzXHxvtXntAta0oZxp5M="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "net.itrich.maubot.holopin",
+      "version": "0.0.1",
+      "license": "MIT",
+      "modules": [
+        "holopin"
+      ],
+      "main_class": "HolopinPlugin",
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "dependencies": null,
+      "soft_dependencies": null,
+      "config": true,
+      "webapp": false,
+      "database": false
+    }
+  },
+  "invite": {
+    "attrs": {
+      "meta": {
+        "description": "A bot to generate invitation tokens from [matrix-registration](https://github.com/ZerataX/matrix-registration).",
+        "homepage": "https://github.com/williamkray/maubot-invite",
+        "downloadPage": "https://github.com/williamkray/maubot-invite/releases",
+        "changelog": "https://github.com/williamkray/maubot-invite/releases"
+      }
+    },
+    "github": {
+      "owner": "williamkray",
+      "repo": "maubot-invite",
+      "rev": "v0.3.1",
+      "hash": "sha256-VQufveYgxVOoMWtfNJ8LYWvjbFtboSNZzdRn7MA7DLA="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "org.jobmachine.invitebot",
+      "version": "0.3.1",
+      "license": "MIT",
+      "modules": [
+        "invite"
+      ],
+      "main_class": "Invite",
+      "database": false,
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    }
+  },
+  "join": {
+    "attrs": {
+      "meta": {
+        "description": "A plugin that restricts who can convince your bot to join new rooms to certain users.",
+        "homepage": "https://github.com/williamkray/maubot-join",
+        "downloadPage": "https://github.com/williamkray/maubot-join/releases",
+        "changelog": "https://github.com/williamkray/maubot-join/releases",
+        "license": "MIT"
+      }
+    },
+    "github": {
+      "owner": "williamkray",
+      "repo": "maubot-join",
+      "rev": "16b273027a519c22d6aafecc026c44739e282f57",
+      "hash": "sha256-uOuMR7xza2NdBjNTbnxI2EeEWcwAb2oMZM3R85xJVuI="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "org.jobmachine.join",
+      "version": "0.3.0",
+      "modules": [
+        "join"
+      ],
+      "main_class": "Join",
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "database": false
+    }
+  },
+  "ldap-ad-inviterbot": {
+    "attrs": {
+      "meta": {
+        "description": "A plugin to sync users from Microsoft Azure AD and LDAP into matrix rooms. (Membership, Power-Levels)",
+        "homepage": "https://github.com/SAPUCC/inviterbot",
+        "downloadPage": "https://github.com/SAPUCC/inviterbot/releases",
+        "changelog": "https://github.com/SAPUCC/inviterbot/blob/v0.1.4/CHANGELOG.md",
+        "license": "GPL-3.0-or-later"
+      }
+    },
+    "github": {
+      "owner": "SAPUCC",
+      "repo": "inviterbot",
+      "rev": "v0.1.4",
+      "hash": "sha256-4vWxMGXMbHLWPk2gMZMGCKGCTTOAJZy7vYjwQyOOLME="
+    },
+    "manifest": {
+      "maubot": "0.2.0",
+      "id": "de.in4md-service.inviterbot",
+      "version": "0.1.4",
+      "license": "GPLv3",
+      "modules": [
+        "inviter"
+      ],
+      "main_class": "InviterBot",
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "dependencies": [
+        null
+      ],
+      "database": false,
+      "config": true
+    }
+  },
+  "metric": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that will reply to a message that contains imperial units and replace them with metric units.",
+        "homepage": "https://github.com/edwardsdean/maubot_metric_bot",
+        "downloadPage": "https://github.com/edwardsdean/maubot_metric_bot/releases",
+        "changelog": "https://github.com/edwardsdean/maubot_metric_bot/releases"
+      }
+    },
+    "github": {
+      "owner": "edwardsdean",
+      "repo": "maubot_metric_bot",
+      "rev": "0.0.4",
+      "hash": "sha256-qtGGCaATIzJMRhLWzFN0kSa6P/tlckCkxatKEfXyi0E="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "me.edwardsdean.maubot.metric",
@@ -766,20 +1167,268 @@
       ],
       "main_class": "MetricPlugin",
       "database": false
-    },
+    }
+  },
+  "ntfy": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/edwardsdean/maubot_metric_bot/blob/0.0.4"
+      "meta": {
+        "description": "A bot for subscribing to [ntfy](https://ntfy.sh) topics and posting messages to Matrix.",
+        "homepage": "https://gitlab.com/999eagle/maubot-ntfy"
+      }
+    },
+    "gitlab": {
+      "owner": "999eagle",
+      "repo": "maubot-ntfy",
+      "rev": "256aa8f315cbb184eba0256c2ec818abbdd2d408",
+      "hash": "sha256-6522dVqhGoPc/qjz65D3kXHks5LLb3yVe0K5abqdXrw="
+    },
+    "manifest": {
+      "maubot": "0.3.0",
+      "id": "cloud.catgirl.ntfy",
+      "version": "0.1.0",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "ntfy"
+      ],
+      "main_class": "NtfyBot",
+      "database": true,
+      "database_type": "asyncpg",
+      "config": true,
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "soft_dependencies": [
+        "emoji>=2.0"
+      ]
+    }
+  },
+  "ovgumensabot": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that automatically sends meals from OvGU canteen every day.",
+        "homepage": "https://github.com/v411e/ovgumensabot",
+        "downloadPage": "https://github.com/v411e/ovgumensabot/releases",
+        "changelog": "https://github.com/v411e/ovgumensabot/releases"
       }
     },
     "github": {
-      "owner": "edwardsdean",
-      "repo": "maubot_metric_bot",
-      "rev": "0.0.4",
-      "hash": "sha256-qtGGCaATIzJMRhLWzFN0kSa6P/tlckCkxatKEfXyi0E="
+      "owner": "v411e",
+      "repo": "ovgumensabot",
+      "rev": "v0.0.8",
+      "hash": "sha256-nuOLUPwE0F15FgOtbq3+qmNNd2eHRrRNJPMM+v1Ksy0="
+    },
+    "manifest": {
+      "maubot": "0.2.0",
+      "id": "com.valentinriess.mensa",
+      "version": "0.0.8",
+      "license": "MIT",
+      "modules": [
+        "ovgumensabot"
+      ],
+      "main_class": "MensaBot",
+      "database": true,
+      "extra_files": [
+        "LICENSE.txt"
+      ],
+      "dependencies": [
+        "requests",
+        "beautifulsoup4"
+      ]
     }
   },
-  {
+  "pingcheck": {
+    "attrs": {
+      "meta": {
+        "description": "A bot to ping the echo bot and send rtt to Icinga passive check.",
+        "homepage": "https://edugit.org/nik/maubot-pingcheck"
+      }
+    },
+    "gitlab": {
+      "owner": "nik",
+      "repo": "maubot-pingcheck",
+      "rev": "0.1.0",
+      "hash": "sha256-ljNi4si7ZkcCidO5l9jJcgdrj4P8RESB1wznxJvzPNQ=",
+      "domain": "edugit.org"
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "xyz.maubot.pingcheck",
+      "version": "0.1.0",
+      "license": "MIT",
+      "modules": [
+        "pingcheck"
+      ],
+      "main_class": "PingcheckBot",
+      "dependencie": [
+        "requests"
+      ],
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    }
+  },
+  "pocket": {
+    "attrs": {
+      "meta": {
+        "description": "A bot integrating with Pocket to fetch articles and archive them.",
+        "homepage": "https://github.com/jaywink/maubot-pocket",
+        "downloadPage": "https://github.com/jaywink/maubot-pocket/releases",
+        "changelog": "https://github.com/jaywink/maubot-pocket/blob/v0.2.5/CHANGELOG.md"
+      }
+    },
+    "github": {
+      "owner": "jaywink",
+      "repo": "maubot-pocket",
+      "rev": "v0.2.5",
+      "hash": "sha256-I3+nfdkW9WkscsAYN2E1jEyoVujaN/zOTJ8HLReqq44="
+    },
+    "manifest": {
+      "maubot": "0.3.1",
+      "id": "me.jasonrobinson.pocket",
+      "version": "0.2.5",
+      "license": "MIT",
+      "modules": [
+        "pocket"
+      ],
+      "main_class": "PocketPlugin",
+      "database": true,
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "webapp": true
+    }
+  },
+  "poll": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that will create a simple poll for users in a room.",
+        "homepage": "https://github.com/TomCasavant/PollMaubot",
+        "downloadPage": "https://github.com/TomCasavant/PollMaubot/releases",
+        "changelog": "https://github.com/TomCasavant/PollMaubot/releases"
+      }
+    },
+    "github": {
+      "owner": "TomCasavant",
+      "repo": "PollMaubot",
+      "rev": "3.0.1",
+      "hash": "sha256-o+9DP9QHZEibmAhy13/fJn72r8hLPY1uuOrTXchjRmw="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "casavant.tom.poll",
+      "version": "3.0.1",
+      "license": "MIT",
+      "modules": [
+        "poll"
+      ],
+      "main_class": "PollPlugin",
+      "database": false
+    }
+  },
+  "random-quote": {
+    "attrs": {
+      "meta": {
+        "description": "A plugin to answer with a random quote from a configurable list.",
+        "homepage": "https://github.com/itrich/QuoteMaubot",
+        "downloadPage": "https://github.com/itrich/QuoteMaubot/releases",
+        "changelog": "https://github.com/itrich/QuoteMaubot/releases"
+      }
+    },
+    "github": {
+      "owner": "itrich",
+      "repo": "QuoteMaubot",
+      "rev": "v0.0.1",
+      "hash": "sha256-NJ6sUC7L4f7ERDAKNcs2RD8q4mGzW0d4rhxh+wqzhVw="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "net.itrich.maubot.quote",
+      "version": "0.0.1",
+      "license": "MIT",
+      "modules": [
+        "quote"
+      ],
+      "main_class": "QuotePlugin",
+      "extra_files": null,
+      "dependencies": null,
+      "soft_dependencies": null,
+      "config": true,
+      "webapp": false,
+      "database": false
+    }
+  },
+  "random-subreddit-post": {
+    "attrs": {
+      "meta": {
+        "description": "A plugin that returns a random post from a given subreddit.",
+        "homepage": "https://github.com/williamkray/maubot-reddit",
+        "downloadPage": "https://github.com/williamkray/maubot-reddit/releases",
+        "changelog": "https://github.com/williamkray/maubot-reddit/releases"
+      }
+    },
+    "github": {
+      "owner": "williamkray",
+      "repo": "maubot-reddit",
+      "rev": "v0.3.6",
+      "hash": "sha256-xinkSNTWTdKSNE0YFLS3yy26HbqD+I11Z8dGVh/tHNw="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "org.jobmachine.reddit",
+      "version": "0.3.6",
+      "license": "MIT",
+      "modules": [
+        "reddit"
+      ],
+      "main_class": "Post",
+      "database": false,
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    }
+  },
+  "redactbot": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that immediately redacts any posted file (except for whitelisted types).",
+        "homepage": "https://gitlab.com/sspaeth/redactbot"
+      }
+    },
+    "gitlab": {
+      "owner": "sspaeth",
+      "repo": "redactbot",
+      "rev": "2bca49b14024844c0aa53b9c4802ef6f8702d99d",
+      "hash": "sha256-uIcXnD3nXVT7mA9SgdyrXGIZuW4CgnCVbCP7TxxnziM="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "xyz.maubot.redactbot",
+      "version": "2.2.0",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "redactbot"
+      ],
+      "main_class": "RedactBot",
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    }
+  },
+  "social-media-download": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that that downloads content from various social media websites given a link.",
+        "homepage": "https://github.com/ggogel/SocialMediaDownloadMaubot",
+        "downloadPage": "https://github.com/ggogel/SocialMediaDownloadMaubot/releases",
+        "changelog": "https://github.com/ggogel/SocialMediaDownloadMaubot/releases"
+      }
+    },
+    "github": {
+      "owner": "ggogel",
+      "repo": "SocialMediaDownloadMaubot",
+      "rev": "1.0.0",
+      "hash": "sha256-0jcR36hyG+OIZn5ipS+B3aGVeNhnS/Y4fShoQ2IaPdk="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "me.gogel.maubot.socialmediadownload",
@@ -795,99 +1444,145 @@
       "extra_files": [
         "base-config.yaml"
       ]
-    },
+    }
+  },
+  "subreddit-linkifier": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/ggogel/RedditPreviewMaubot/blob/1.0.0"
+      "meta": {
+        "description": "A bot that condescendingly corrects a user when they enter an r/subreddit without providing a link to that subreddit.",
+        "homepage": "https://github.com/TomCasavant/RedditMaubot",
+        "downloadPage": "https://github.com/TomCasavant/RedditMaubot/releases",
+        "changelog": "https://github.com/TomCasavant/RedditMaubot/releases"
       }
     },
     "github": {
-      "owner": "ggogel",
-      "repo": "RedditPreviewMaubot",
-      "rev": "1.0.0",
-      "hash": "sha256-0jcR36hyG+OIZn5ipS+B3aGVeNhnS/Y4fShoQ2IaPdk="
-    }
-  },
-  {
+      "owner": "TomCasavant",
+      "repo": "RedditMaubot",
+      "rev": "1.5.0",
+      "hash": "sha256-4F59gCmSl7FNWTys5c9r4Ha0gschDyiYjsX7emhRwuU="
+    },
     "manifest": {
       "maubot": "0.1.0",
-      "id": "me.gogel.maubot.wolframalpha",
-      "version": "0.0.4",
+      "id": "casavant.tom.reddit",
+      "version": "1.5.0",
       "license": "MIT",
       "modules": [
-        "wolframalpha"
+        "reddit"
       ],
-      "main_class": "WolframAlphaPlugin",
+      "main_class": "RedditPlugin",
       "database": false,
       "extra_files": [
         "base-config.yaml"
       ]
-    },
+    }
+  },
+  "ticker": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/ggogel/WolframAlphaMaubot/blob/v0.0.4"
+      "meta": {
+        "description": "A bot to return financial data about a stock or cryptocurrency.",
+        "homepage": "https://github.com/williamkray/maubot-ticker",
+        "downloadPage": "https://github.com/williamkray/maubot-ticker/releases",
+        "changelog": "https://github.com/williamkray/maubot-ticker/releases"
       }
     },
     "github": {
-      "owner": "ggogel",
-      "repo": "WolframAlphaMaubot",
-      "rev": "v0.0.4",
-      "hash": "sha256-2GJPAHc9xY7uznALpjzxkpAX16PBxMMSl3QMzjudA+w="
-    }
-  },
-  {
+      "owner": "williamkray",
+      "repo": "maubot-ticker",
+      "rev": "v0.0.6",
+      "hash": "sha256-o/AjzuNaVzHKnpV10p19vDJthEUZ75nAg3KT0Ff3LEg="
+    },
     "manifest": {
       "maubot": "0.1.0",
-      "id": "me.gogel.maubot.youtubepreview",
-      "version": "0.0.3",
+      "id": "org.jobmachine.tickerbot",
+      "version": "0.0.6",
       "license": "MIT",
       "modules": [
-        "youtubepreview"
+        "tickerbot"
       ],
-      "main_class": "YoutubePreviewPlugin",
-      "database": false
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/ggogel/YoutubePreviewMaubot/blob/v0.0.3"
-      }
-    },
-    "github": {
-      "owner": "ggogel",
-      "repo": "YoutubePreviewMaubot",
-      "rev": "v0.0.3",
-      "hash": "sha256-9BfPGj/rjX35/G4aqc/LSJmph6RUOzLd424CuW/aahE="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.3.1",
-      "id": "me.jasonrobinson.pocket",
-      "version": "0.2.5",
-      "license": "MIT",
-      "modules": [
-        "pocket"
-      ],
-      "main_class": "PocketPlugin",
-      "database": true,
+      "main_class": "TickerBot",
+      "database": false,
       "extra_files": [
         "base-config.yaml"
-      ],
-      "webapp": true
-    },
+      ]
+    }
+  },
+  "tmdb": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/jaywink/maubot-pocket/blob/v0.2.5"
+      "meta": {
+        "description": "A bot that posts information about movies fetched from TheMovieDB.org.",
+        "homepage": "https://codeberg.org/lomion/tmdb-bot",
+        "downloadPage": "https://codeberg.org/lomion/tmdb-bot/releases",
+        "changelog": "https://codeberg.org/lomion/tmdb-bot/releases",
+        "license": "AGPL-3.0-or-later"
+      }
+    },
+    "gitea": {
+      "domain": "codeberg.org",
+      "owner": "lomion",
+      "repo": "tmdb-bot",
+      "rev": "rel.1.3.0",
+      "hash": "sha256-QeKpIukLCeJOxi/+H+Hukf7mA38gvf8q37o4FOuigAU="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "lomion.tmdb",
+      "version": "1.3.0",
+      "license": "AGPL 3.0",
+      "modules": [
+        "tmdb"
+      ],
+      "main_class": "TmdbBot",
+      "database": true
+    }
+  },
+  "token": {
+    "attrs": {
+      "meta": {
+        "description": "A maubot to create and manage your synapse user registration tokens.",
+        "homepage": "https://github.com/yoxcu/maubot-token",
+        "downloadPage": "https://github.com/yoxcu/maubot-token/releases",
+        "changelog": "https://github.com/yoxcu/maubot-token/releases"
       }
     },
     "github": {
-      "owner": "jaywink",
-      "repo": "maubot-pocket",
-      "rev": "v0.2.5",
-      "hash": "sha256-I3+nfdkW9WkscsAYN2E1jEyoVujaN/zOTJ8HLReqq44="
+      "owner": "yoxcu",
+      "repo": "maubot-token",
+      "rev": "v1.1.0",
+      "hash": "sha256-8ZAH9Kn0EQYY9gLx48gF+aEsFOdlZlrbUIvLMP0uwi4="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "de.yoxcu.token",
+      "version": "1.1.0",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "tokenbot"
+      ],
+      "main_class": "TokenBot",
+      "database": false,
+      "extra_files": [
+        "base-config.yaml",
+        "LICENSE"
+      ],
+      "config": true
     }
   },
-  {
+  "trump": {
+    "attrs": {
+      "meta": {
+        "description": "A bot that generates a Trump tweet with the given content.",
+        "homepage": "https://github.com/jeffcasavant/MaubotTrumpTweet",
+        "downloadPage": "https://github.com/jeffcasavant/MaubotTrumpTweet/releases",
+        "changelog": "https://github.com/jeffcasavant/MaubotTrumpTweet/releases"
+      }
+    },
+    "github": {
+      "owner": "jeffcasavant",
+      "repo": "MaubotTrumpTweet",
+      "rev": "v1.1.2",
+      "hash": "sha256-WlrFt+uj6E7Ecg+3KW6fjrMXSUP5YFA5ZyitvBON3pA="
+    },
+    "isPoetry": true,
     "manifest": {
       "maubot": "0.1.0",
       "modules": [
@@ -951,23 +1646,28 @@
       "dependencies": [
         "Pillow>=9.0.1, <10.0.0"
       ]
-    },
+    }
+  },
+  "twilio": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/jeffcasavant/MaubotTrumpTweet/blob/v1.1.2",
-        "isPoetry": true
+      "meta": {
+        "description": "Maubot-based SMS bridge.",
+        "homepage": "https://github.com/jeffcasavant/MaubotTwilio",
+        "downloadPage": "https://github.com/jeffcasavant/MaubotTwilio/releases",
+        "changelog": "https://github.com/jeffcasavant/MaubotTwilio/releases"
       }
     },
     "github": {
       "owner": "jeffcasavant",
-      "repo": "MaubotTrumpTweet",
-      "rev": "v1.1.2",
-      "hash": "sha256-WlrFt+uj6E7Ecg+3KW6fjrMXSUP5YFA5ZyitvBON3pA="
-    }
-  },
-  {
+      "repo": "MaubotTwilio",
+      "rev": "0.1.0",
+      "hash": "sha256-b1M9+uXVq3yb4IgcoL/5YqRZ8a13HfyqMw6QFBuBLAM="
+    },
     "manifest": {
       "maubot": "0.1.0",
+      "id": "org.casavant.jeff.twilio",
+      "version": "0.1.0",
+      "license": "MIT",
       "modules": [
         "twilio_plugin"
       ],
@@ -977,27 +1677,83 @@
       "extra_files": [
         "base-config.yaml"
       ],
-      "id": "org.casavant.jeff.twilio",
-      "version": "0.2.0rc1",
-      "license": "MIT",
       "dependencies": [
-        "twilio>=7.9.2, <8.0.0"
+        "maubot==0.1.0b1",
+        "mautrix==0.5.0b2"
       ]
-    },
+    }
+  },
+  "urban": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/jeffcasavant/MaubotTwilio/blob/0.2.0rc1",
-        "isPoetry": true
+      "meta": {
+        "description": "A bot that fetches definitions from [Urban Dictionary](https://www.urbandictionary.com/).",
+        "homepage": "https://github.com/dvdgsng/UrbanMaubot",
+        "downloadPage": "https://github.com/dvdgsng/UrbanMaubot/releases",
+        "changelog": "https://github.com/dvdgsng/UrbanMaubot/releases"
       }
     },
     "github": {
-      "owner": "jeffcasavant",
-      "repo": "MaubotTwilio",
-      "rev": "0.2.0rc1",
-      "hash": "sha256-Quccd/2K5eLv3QpmL0cL569QT7nyuqX7bvua+90XBnw="
+      "owner": "dvdgsng",
+      "repo": "UrbanMaubot",
+      "rev": "1.0.2",
+      "hash": "sha256-JQ2PpsH/Nno7XqcF1HpZHM/Qv/gta/xGPjfIKtY+pxM="
+    },
+    "manifest": {
+      "id": "com.dvdgsng.maubot.urban",
+      "version": "1.0.2",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "urban"
+      ],
+      "main_class": "UrbanDictBot"
     }
   },
-  {
+  "urlpreview": {
+    "attrs": {
+      "postPatch": "cd urlpreview",
+      "meta": {
+        "description": "A bot that responds to links with a link preview embed, using Matrix API to fetch meta tags.",
+        "homepage": "https://github.com/coffeebank/coffee-maubot/tree/master/urlpreview",
+        "downloadPage": "https://github.com/coffeebank/coffee-maubot/releases",
+        "changelog": "https://github.com/coffeebank/coffee-maubot/releases"
+      }
+    },
+    "github": {
+      "owner": "coffeebank",
+      "repo": "coffee-maubot",
+      "rev": "7d75c7b4c069ecf4f0c1ba944fb5e235a6143a26",
+      "hash": "sha256-dFRt+v5sSuuAW60oLvm1WfdcraQYzkYUH6iJciGTiwI="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "coffee.maubot.urlpreview",
+      "version": "0.1.0.35",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "urlpreview"
+      ],
+      "main_class": "UrlpreviewBot",
+      "database": false,
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    }
+  },
+  "weather": {
+    "attrs": {
+      "meta": {
+        "description": "A bot to get the weather from wttr.in and return a single line of text for the location specified.",
+        "homepage": "https://github.com/kellya/maubot-weather",
+        "downloadPage": "https://github.com/kellya/maubot-weather/releases",
+        "changelog": "https://github.com/kellya/maubot-weather/blob/v0.4.1/CHANGELOG.md"
+      }
+    },
+    "github": {
+      "owner": "kellya",
+      "repo": "maubot-weather",
+      "rev": "v0.4.1",
+      "hash": "sha256-DHMsemVbiXONeg45IpeaP477fbgkftz5mZdI6OhRHOI="
+    },
     "manifest": {
       "maubot": "0.1.0",
       "id": "com.arachnitech.weather",
@@ -1010,368 +1766,28 @@
       "extra_files": [
         "base-config.yaml"
       ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/kellya/maubot-weather/blob/v0.4.1"
-      }
-    },
-    "github": {
-      "owner": "kellya",
-      "repo": "maubot-weather",
-      "rev": "v0.4.1",
-      "hash": "sha256-DHMsemVbiXONeg45IpeaP477fbgkftz5mZdI6OhRHOI="
     }
   },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "de.hyteck.alertbot",
-      "version": "1.1.1",
-      "license": "AGPL-3.0-or-later",
-      "modules": [
-        "alertbot"
-      ],
-      "main_class": "AlertBot",
-      "webapp": true
-    },
+  "welcome": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/moan0s/alertbot/blob/v1.1.1"
-      }
-    },
-    "github": {
-      "owner": "moan0s",
-      "repo": "alertbot",
-      "rev": "v1.1.1",
-      "hash": "sha256-hA4Wl1mrIuThQVHTPhMAVsvdbhhx/rHqpOResWO8xiI="
-    }
-  },
-  {
-    "manifest": {
-      "id": "pl.rom4nik.maubot.alternatingcaps",
-      "version": "0.1.1",
-      "license": "MIT",
-      "modules": [
-        "alternatingcaps"
-      ],
-      "main_class": "AlternatingCaps"
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/rom4nik/maubot-alternatingcaps/blob/v0.1.1"
-      }
-    },
-    "github": {
-      "owner": "rom4nik",
-      "repo": "maubot-alternatingcaps",
-      "rev": "v0.1.1",
-      "hash": "sha256-fxrnJjmJ+wmJIDFY1FQn2n2NcrG3nx3ko5AmxloJS98="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "casavant.tom.giphy",
-      "version": "3.2.0",
-      "license": "MIT",
-      "modules": [
-        "giphy"
-      ],
-      "main_class": "GiphyPlugin",
-      "database": false,
-      "extra_files": [
-        "base-config.yaml"
-      ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/TomCasavant/GiphyMaubot/blob/3.2.0"
-      }
-    },
-    "github": {
-      "owner": "TomCasavant",
-      "repo": "GiphyMaubot",
-      "rev": "3.2.0",
-      "hash": "sha256-63LPt+L20zKYsbqyyJ5lFeqNCMrv5PU3txfuyPvrYV8="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "casavant.tom.poll",
-      "version": "3.0.1",
-      "license": "MIT",
-      "modules": [
-        "poll"
-      ],
-      "main_class": "PollPlugin",
-      "database": false
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/TomCasavant/PollMaubot/blob/3.0.1"
-      }
-    },
-    "github": {
-      "owner": "TomCasavant",
-      "repo": "PollMaubot",
-      "rev": "3.0.1",
-      "hash": "sha256-o+9DP9QHZEibmAhy13/fJn72r8hLPY1uuOrTXchjRmw="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "casavant.tom.reddit",
-      "version": "1.5.0",
-      "license": "MIT",
-      "modules": [
-        "reddit"
-      ],
-      "main_class": "RedditPlugin",
-      "database": false,
-      "extra_files": [
-        "base-config.yaml"
-      ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/TomCasavant/RedditMaubot/blob/1.5.0"
-      }
-    },
-    "github": {
-      "owner": "TomCasavant",
-      "repo": "RedditMaubot",
-      "rev": "1.5.0",
-      "hash": "sha256-4F59gCmSl7FNWTys5c9r4Ha0gschDyiYjsX7emhRwuU="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "com.valentinriess.hasswebhook",
-      "version": "0.0.9",
-      "license": "MIT",
-      "modules": [
-        "hasswebhook"
-      ],
-      "main_class": "HassWebhook",
-      "config": true,
-      "extra_files": [
-        "base-config.yaml"
-      ],
-      "webapp": true
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/v411e/hasswebhookbot/blob/v0.0.9"
-      }
-    },
-    "github": {
-      "owner": "v411e",
-      "repo": "hasswebhookbot",
-      "rev": "v0.0.9",
-      "hash": "sha256-QQnKrLz9tokXErZgWhfGYhQewYyhpFXKKCdm1zUHwgI="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.2.0",
-      "id": "com.valentinriess.mensa",
-      "version": "0.0.8",
-      "license": "MIT",
-      "modules": [
-        "ovgumensabot"
-      ],
-      "main_class": "MensaBot",
-      "database": true,
-      "extra_files": [
-        "LICENSE.txt"
-      ],
-      "dependencies": [
-        "requests",
-        "beautifulsoup4"
-      ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/v411e/ovgumensabot/blob/v0.0.8"
-      }
-    },
-    "github": {
-      "owner": "v411e",
-      "repo": "ovgumensabot",
-      "rev": "v0.0.8",
-      "hash": "sha256-nuOLUPwE0F15FgOtbq3+qmNNd2eHRrRNJPMM+v1Ksy0="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "org.jobmachine.createspaceroom",
-      "version": "0.1.2",
-      "modules": [
-        "createspaceroom"
-      ],
-      "main_class": "CreateSpaceRoom",
-      "config": true,
-      "extra_files": [
-        "base-config.yaml"
-      ],
-      "database": false
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/williamkray/maubot-createroom/blob/8afeb9facc7a9b137af34611c1c9387bebe93a02"
+      "meta": {
+        "description": "A plugin that greets new people with a configurable message when they join a room.",
+        "homepage": "https://github.com/williamkray/maubot-welcome",
+        "downloadPage": "https://github.com/williamkray/maubot-welcome/releases",
+        "changelog": "https://github.com/williamkray/maubot-welcome/releases",
+        "license": "MIT"
       }
     },
     "github": {
       "owner": "williamkray",
-      "repo": "maubot-createroom",
-      "rev": "8afeb9facc7a9b137af34611c1c9387bebe93a02",
-      "hash": "sha256-u55xYf13W9hG1gJS3S17FrDqUxwcqdsNtqmTj9sdEGQ="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "org.jobmachine.invitebot",
-      "version": "0.3.1",
-      "license": "MIT",
-      "modules": [
-        "invite"
-      ],
-      "main_class": "Invite",
-      "database": false,
-      "extra_files": [
-        "base-config.yaml"
-      ]
+      "repo": "maubot-welcome",
+      "rev": "7ca03c176191fd4e882d25d73e3f3a97ac81efe6",
+      "hash": "sha256-jq15rX1rBtQe919OWP9LOKwJafS1PVR7v8HxkG5fgus="
     },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/williamkray/maubot-invite/blob/v0.3.1"
-      }
-    },
-    "github": {
-      "owner": "williamkray",
-      "repo": "maubot-invite",
-      "rev": "v0.3.1",
-      "hash": "sha256-VQufveYgxVOoMWtfNJ8LYWvjbFtboSNZzdRn7MA7DLA="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "org.jobmachine.join",
-      "version": "0.2.3",
-      "modules": [
-        "join"
-      ],
-      "main_class": "Join",
-      "extra_files": [
-        "base-config.yaml"
-      ],
-      "database": false
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/williamkray/maubot-join/blob/41dfe34d95c33e54eda65ca176a8cf5fea7ba13b"
-      }
-    },
-    "github": {
-      "owner": "williamkray",
-      "repo": "maubot-join",
-      "rev": "41dfe34d95c33e54eda65ca176a8cf5fea7ba13b",
-      "hash": "sha256-WUMXtatHUFKSIhKAKHAUDjJMljVmjjTwaPf8K7G+h7Q="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "org.jobmachine.kickbot",
-      "version": "0.0.6",
-      "modules": [
-        "kickbot"
-      ],
-      "main_class": "KickBot",
-      "extra_files": [
-        "base-config.yaml"
-      ],
-      "database": true,
-      "database_type": "asyncpg"
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/williamkray/maubot-kickbot/blob/16b3b5b3183810b5954d10c83de63790648b3d25"
-      }
-    },
-    "github": {
-      "owner": "williamkray",
-      "repo": "maubot-kickbot",
-      "rev": "16b3b5b3183810b5954d10c83de63790648b3d25",
-      "hash": "sha256-Nr5ptltCUkjPW2nzCtFIYbmruT7OSTlQsn/mlgubS9g="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "org.jobmachine.reddit",
-      "version": "0.3.6",
-      "license": "MIT",
-      "modules": [
-        "reddit"
-      ],
-      "main_class": "Post",
-      "database": false,
-      "extra_files": [
-        "base-config.yaml"
-      ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/williamkray/maubot-reddit/blob/v0.3.6"
-      }
-    },
-    "github": {
-      "owner": "williamkray",
-      "repo": "maubot-reddit",
-      "rev": "v0.3.6",
-      "hash": "sha256-xinkSNTWTdKSNE0YFLS3yy26HbqD+I11Z8dGVh/tHNw="
-    }
-  },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "org.jobmachine.tickerbot",
-      "version": "0.0.6",
-      "license": "MIT",
-      "modules": [
-        "tickerbot"
-      ],
-      "main_class": "TickerBot",
-      "database": false,
-      "extra_files": [
-        "base-config.yaml"
-      ]
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/williamkray/maubot-ticker/blob/v0.0.6"
-      }
-    },
-    "github": {
-      "owner": "williamkray",
-      "repo": "maubot-ticker",
-      "rev": "v0.0.6",
-      "hash": "sha256-o/AjzuNaVzHKnpV10p19vDJthEUZ75nAg3KT0Ff3LEg="
-    }
-  },
-  {
     "manifest": {
       "maubot": "0.1.0",
       "id": "org.jobmachine.welcome",
-      "version": "0.0.2",
+      "version": "0.0.4",
       "modules": [
         "welcome"
       ],
@@ -1380,46 +1796,36 @@
         "base-config.yaml"
       ],
       "database": false
-    },
-    "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/williamkray/maubot-welcome/blob/06843a1bd7cb23f6a74f86b241cb55514aa5701a"
-      }
-    },
-    "github": {
-      "owner": "williamkray",
-      "repo": "maubot-welcome",
-      "rev": "06843a1bd7cb23f6a74f86b241cb55514aa5701a",
-      "hash": "sha256-4bQi6HhlGD31BCUvlNrd0d5CC8YqobVydTh9x2nbe50="
     }
   },
-  {
-    "manifest": {
-      "maubot": "0.1.0",
-      "id": "de.yoxcu.token",
-      "version": "1.0.0",
-      "license": "AGPL-3.0-or-later",
-      "modules": [
-        "token"
-      ],
-      "main_class": "TokenBot",
-      "database": false,
-      "extra_files": [
-        "base-config.yaml",
-        "LICENSE"
-      ],
-      "config": true
-    },
+  "wolframalpha": {
     "attrs": {
-      "genPassthru": {
-        "repoBase": "https://github.com/yoxcu/maubot-token/blob/v1.0.0"
+      "meta": {
+        "description": "A bot that allows requesting information from [WolframAlpha](https://www.wolframalpha.com/).",
+        "homepage": "https://github.com/ggogel/WolframAlphaMaubot",
+        "downloadPage": "https://github.com/ggogel/WolframAlphaMaubot/releases",
+        "changelog": "https://github.com/ggogel/WolframAlphaMaubot/releases"
       }
     },
     "github": {
-      "owner": "yoxcu",
-      "repo": "maubot-token",
-      "rev": "v1.0.0",
-      "hash": "sha256-GmY4GBKJ7Nl/UCkbz0ucLeJysDO3D51twlH6gZPLroA="
+      "owner": "ggogel",
+      "repo": "WolframAlphaMaubot",
+      "rev": "v0.0.4",
+      "hash": "sha256-2GJPAHc9xY7uznALpjzxkpAX16PBxMMSl3QMzjudA+w="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "me.gogel.maubot.wolframalpha",
+      "version": "0.0.4",
+      "license": "MIT",
+      "modules": [
+        "wolframalpha"
+      ],
+      "main_class": "WolframAlphaPlugin",
+      "database": false,
+      "extra_files": [
+        "base-config.yaml"
+      ]
     }
   }
-]
+}
