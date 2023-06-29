@@ -12,10 +12,6 @@ import zipfile
 
 from typing import List
 
-name_rewrites = {
-    'LDAP/AD inviter bot': 'ldap-ad-inviter-bot',
-}
-
 hostnames = {
     'git.skeg1.se': 'gitlab',
     'edugit.org': 'gitlab',
