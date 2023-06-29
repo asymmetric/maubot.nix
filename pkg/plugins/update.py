@@ -6,6 +6,7 @@ import json
 import os
 import subprocess
 import ruamel.yaml
+import sys
 import toml
 import zipfile
 
@@ -41,6 +42,8 @@ def process_repo(path, official):
     origurl = repourl
     if '/' in name:
         name = os.path.split(p)[-1].removesuffix('.yaml')
+    if name in plugins:
+        raise ValueError(f'Duplicate plugin {name}, refusing to continue')
     repodir = f'/tmp/maubot-plugins/{name}'
     plugindir = repodir
     if '/tree/' in repourl:
