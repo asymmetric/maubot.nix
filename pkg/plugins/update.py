@@ -36,7 +36,7 @@ def process_repo(path, official):
         data = yaml.load(f)
     name, repourl, license, desc = data['name'], data['repo'], data['license'], data['description']
     origurl = repourl
-    if '/' in name:
+    if '/' in name or ' ' in name:
         name = os.path.split(p)[-1].removesuffix('.yaml')
     if name in plugins:
         raise ValueError(f'Duplicate plugin {name}, refusing to continue')
