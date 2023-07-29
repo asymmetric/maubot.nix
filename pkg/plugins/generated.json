@@ -564,14 +564,14 @@
     "github": {
       "owner": "maubot",
       "repo": "songwhip",
-      "rev": "68d5226b19b983f7ef0e2452c3c1be93a8b5c23b",
-      "hash": "sha256-gA4anzN5Qifam+8fPDb7avo1kBZW4x81ckJB3b7Cia0="
+      "rev": "c8d00999ab77a77d0036ee6c71b2cf11583f8edd",
+      "hash": "sha256-oghM1IECN88KhwRhGZCTJo4uMwc495sWNHeK9KaK4FU="
     },
     "manifest": {
       "maubot": "0.1.0",
       "id": "xyz.maubot.songwhip",
       "version": "0.1.0",
-      "license": "AGPL-3.0-or-later",
+      "license": "MIT",
       "modules": [
         "songwhip"
       ],
@@ -716,20 +716,20 @@
         "description": "A plugin that minimally tracks user activity within a space. Useful for kicking inactive users from a private community.",
         "homepage": "https://github.com/williamkray/maubot-kickbot",
         "downloadPage": "https://github.com/williamkray/maubot-kickbot/releases",
-        "changelog": "https://github.com/williamkray/maubot-kickbot/releases",
-        "license": "MIT"
+        "changelog": "https://github.com/williamkray/maubot-kickbot/releases"
       }
     },
     "github": {
       "owner": "williamkray",
       "repo": "maubot-kickbot",
-      "rev": "804332f78ba96b89b95e8c86d6a65745c2b9e04a",
-      "hash": "sha256-p6TZWo2xgBqOo2m5MoH8PYhYjwCPu+qxtKL+zYwRy9U="
+      "rev": "a4c31c7a1492585f2155705be8cab7e3f73f6b69",
+      "hash": "sha256-TLaGpLrTR4TLR0TjY3v9FFST8JxEP4swJ7kzt0fDwJI="
     },
     "manifest": {
       "maubot": "0.1.0",
       "id": "org.jobmachine.kickbot",
-      "version": "0.0.9",
+      "version": "0.0.10",
+      "license": "MIT",
       "modules": [
         "kickbot"
       ],
@@ -862,20 +862,20 @@
         "description": "A plugin that creates new rooms and automatically sets them to be part of a private Matrix Space.",
         "homepage": "https://github.com/williamkray/maubot-createroom",
         "downloadPage": "https://github.com/williamkray/maubot-createroom/releases",
-        "changelog": "https://github.com/williamkray/maubot-createroom/releases",
-        "license": "MIT"
+        "changelog": "https://github.com/williamkray/maubot-createroom/releases"
       }
     },
     "github": {
       "owner": "williamkray",
       "repo": "maubot-createroom",
-      "rev": "4ed9ecf3da25b39b910695b12f461db23fcd7faf",
-      "hash": "sha256-semP+9x+29aEAgOKqgaMChyMGhL98QROHLlzS+z1Oqw="
+      "rev": "4eecdcffa6c06276287c2a3d4e65905a72ad18ad",
+      "hash": "sha256-x1eoUX8u1IR/hLgS8YcpSoTByl+m3GoTW3fnFMDs1XA="
     },
     "manifest": {
       "maubot": "0.1.0",
       "id": "org.jobmachine.createspaceroom",
       "version": "0.1.2",
+      "license": "MIT",
       "modules": [
         "createspaceroom"
       ],
@@ -893,20 +893,20 @@
         "description": "Superior gif responses. Save your own library of image or video responses. \nAllows fallback behavior to Giphy or Tenor, optionally saves quotes from\nusers for comedic effect or to be used as an FAQ bot!\n",
         "homepage": "https://github.com/williamkray/maubot-gifme",
         "downloadPage": "https://github.com/williamkray/maubot-gifme/releases",
-        "changelog": "https://github.com/williamkray/maubot-gifme/releases",
-        "license": "MIT"
+        "changelog": "https://github.com/williamkray/maubot-gifme/releases"
       }
     },
     "github": {
       "owner": "williamkray",
       "repo": "maubot-gifme",
-      "rev": "41dea3d57167bd8b79a638a1291f8450ecb14007",
-      "hash": "sha256-IQws1TooatPtIIwkcrDhidSg6zk4nJ8mHBHymNyxWxQ="
+      "rev": "6dbbb9ebce903887b62f95b04f4640779762e57a",
+      "hash": "sha256-5MHLtm3qktUyvWyuwQEUQWL8fxszZ6h/hHClLLr0Uvs="
     },
     "manifest": {
       "maubot": "0.4.0",
       "id": "org.jobmachine.gifme",
       "version": "0.1.0",
+      "license": "MIT",
       "modules": [
         "gifme"
       ],
@@ -1083,20 +1083,20 @@
         "description": "A plugin that restricts who can convince your bot to join new rooms to certain users.",
         "homepage": "https://github.com/williamkray/maubot-join",
         "downloadPage": "https://github.com/williamkray/maubot-join/releases",
-        "changelog": "https://github.com/williamkray/maubot-join/releases",
-        "license": "MIT"
+        "changelog": "https://github.com/williamkray/maubot-join/releases"
       }
     },
     "github": {
       "owner": "williamkray",
       "repo": "maubot-join",
-      "rev": "16b273027a519c22d6aafecc026c44739e282f57",
-      "hash": "sha256-uOuMR7xza2NdBjNTbnxI2EeEWcwAb2oMZM3R85xJVuI="
+      "rev": "1b57758dfe3a2191588bb903ea546328146e69d8",
+      "hash": "sha256-aqpL+KO5p0hre7RCUZrM270Ah+cR4cQxZn7LTXLT79k="
     },
     "manifest": {
       "maubot": "0.1.0",
       "id": "org.jobmachine.join",
       "version": "0.3.0",
+      "license": "MIT",
       "modules": [
         "join"
       ],
@@ -1140,6 +1140,42 @@
       ],
       "database": false,
       "config": true
+    }
+  },
+  "local_stt": {
+    "attrs": {
+      "meta": {
+        "description": "A Maubot to transcribe audio messages in matrix rooms using local open-source libraries",
+        "homepage": "https://github.com/ElishaAz/mau_local_stt",
+        "downloadPage": "https://github.com/ElishaAz/mau_local_stt/releases",
+        "changelog": "https://github.com/ElishaAz/mau_local_stt/releases",
+        "license": "GPL-3.0-only"
+      }
+    },
+    "github": {
+      "owner": "ElishaAz",
+      "repo": "mau_local_stt",
+      "rev": "v1.0.2",
+      "hash": "sha256-EyDJ4RtQjBl7BQ7Y/0LWfX4zkVVqBOqjnhb9tXhFxio="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "com.elishaaz.maulocalstt",
+      "version": "1.0.2",
+      "license": "GPLv3",
+      "modules": [
+        "maulocalstt"
+      ],
+      "main_class": "MauLocalSTT",
+      "config": true,
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "dependencies": [
+        "whispercpp",
+        "numpy",
+        "vosk"
+      ]
     }
   },
   "metric": {
@@ -1513,7 +1549,7 @@
         "homepage": "https://codeberg.org/lomion/tmdb-bot",
         "downloadPage": "https://codeberg.org/lomion/tmdb-bot/releases",
         "changelog": "https://codeberg.org/lomion/tmdb-bot/releases",
-        "license": "AGPL-3.0-or-later"
+        "license": "AGPL-3.0-only"
       }
     },
     "gitea": {
@@ -1768,26 +1804,60 @@
       ]
     }
   },
+  "webhook": {
+    "attrs": {
+      "meta": {
+        "description": "Send messages to rooms via user-defined webhooks.",
+        "homepage": "https://github.com/jkhsjdhjs/maubot-webhook",
+        "downloadPage": "https://github.com/jkhsjdhjs/maubot-webhook/releases",
+        "changelog": "https://github.com/jkhsjdhjs/maubot-webhook/releases"
+      }
+    },
+    "github": {
+      "owner": "jkhsjdhjs",
+      "repo": "maubot-webhook",
+      "rev": "v0.2.0",
+      "hash": "sha256-GGbd7PvW2P0u1h7Cp1GMuEg3uQ0osZBWWHzSW524aBc="
+    },
+    "manifest": {
+      "maubot": "0.3.1",
+      "id": "me.jkhsjdhjs.maubot.webhook",
+      "version": "0.2.0",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "plugin"
+      ],
+      "main_class": "WebhookPlugin",
+      "extra_files": [
+        "base-config.yaml"
+      ],
+      "dependencies": [
+        "Jinja2~=3.1"
+      ],
+      "config": true,
+      "webapp": true
+    }
+  },
   "welcome": {
     "attrs": {
       "meta": {
         "description": "A plugin that greets new people with a configurable message when they join a room.",
         "homepage": "https://github.com/williamkray/maubot-welcome",
         "downloadPage": "https://github.com/williamkray/maubot-welcome/releases",
-        "changelog": "https://github.com/williamkray/maubot-welcome/releases",
-        "license": "MIT"
+        "changelog": "https://github.com/williamkray/maubot-welcome/releases"
       }
     },
     "github": {
       "owner": "williamkray",
       "repo": "maubot-welcome",
-      "rev": "7ca03c176191fd4e882d25d73e3f3a97ac81efe6",
-      "hash": "sha256-jq15rX1rBtQe919OWP9LOKwJafS1PVR7v8HxkG5fgus="
+      "rev": "a6d3e6cbea87056a1d4694f5379c9ae9d9cdf1c5",
+      "hash": "sha256-8BIDj/kHys/Pw1n1lLtxjYOstI/UG5UAlxD+3rpKj0Q="
     },
     "manifest": {
       "maubot": "0.1.0",
       "id": "org.jobmachine.welcome",
       "version": "0.0.4",
+      "license": "MIT",
       "modules": [
         "welcome"
       ],

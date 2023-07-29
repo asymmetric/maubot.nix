@@ -16,6 +16,17 @@ let
           hash = "sha256-yPGSKqjOz1EY5/V0oKz2EiZ90q2O4TINoXdxHuB7Gqk=";
         };
       });
+      # <0.20
+      mautrix = super.mautrix.overridePythonAttrs (old: rec {
+        version = "0.19.16";
+        disabled = super.pythonOlder "3.8";
+        checkInputs = old.checkInputs ++ [ self.sqlalchemy ];
+        SQLALCHEMY_SILENCE_UBER_WARNING = true;
+        src = old.src.override {
+          rev = "refs/tags/v${version}";
+          hash = "sha256-aZlc4+J5Q+N9qEzGUMhsYguPdUy+E5I06wrjVyqvVDk=";
+        };
+      });
       sqlalchemy = super.buildPythonPackage rec {
         pname = "SQLAlchemy";
         version = "1.3.24";

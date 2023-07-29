@@ -105,7 +105,6 @@ Instruction:
     flake's output `packages.${builtins.currentSystem}.maubot`. If you
     want to develop Maubot plugins and need the `maubot` Python module
     for IDE support, use
-    `packages.${builtins.currentSystem}.maubot-lib` or run
-    `nix develop` in this flake's root. You can also use this flake's
-    output `overlays.default`, in that case you should use
+    `packages.${builtins.currentSystem}.maubot-lib`. You can also use
+    this flake's output `overlays.default`, in that case you should use
     `python3Packages.maubot` instead of `maubot-lib`.

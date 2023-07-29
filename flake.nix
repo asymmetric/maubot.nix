@@ -34,44 +34,8 @@
           };
         };
       };
-      # used for testing, I really ought to move it to checks...
-      nixosConfigurations.test0 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          (import ./module)
-          {
-            system.stateVersion = "23.05";
-            fileSystems."/" = { device = "none"; fsType = "tmpfs"; neededForBoot = false; options = [ "defaults" "size=2G" "mode=755" ]; };
-            boot.loader.grub.device = "nodev";
-          }
-        ];
-      };
-      nixosConfigurations.test1 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          (import ./module)
-          ({ pkgs, ... }: {
-            system.stateVersion = "23.05";
-            fileSystems."/" = { device = "none"; fsType = "tmpfs"; neededForBoot = false; options = [ "defaults" "size=2G" "mode=755" ]; };
-            boot.loader.grub.device = "nodev";
-            services.maubot.enable = true;
-            services.maubot.plugins = [ (pkgs.callPackage ./pkg { }).plugins.echo ];
-          })
-        ];
-      };
-      nixosConfigurations.test2 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          (import ./module)
-          ({ pkgs, ... }: {
-            system.stateVersion = "23.05";
-            fileSystems."/" = { device = "none"; fsType = "tmpfs"; neededForBoot = false; options = [ "defaults" "size=2G" "mode=755" ]; };
-            boot.loader.grub.device = "nodev";
-            services.maubot.enable = true;
-            services.maubot.plugins = (pkgs.callPackage ./pkg { }).plugins.allOfficialPlugins;
-            services.maubot.settings.database = "postgresql://maubot@localhost/maubot";
-          })
-        ];
+      checks.x86_64-linux = {
+        inherit (self.packages.x86_64-linux.maubot) withAllPlugins;
       };
       formatter = forEachSystem (pkgs: pkgs.nixpkgs-fmt);
       packages = forEachSystem (pkgs: {
@@ -80,18 +44,15 @@
         maubot-lib = pkgs.python3Packages.maubot;
       });
       devShells = forEachSystem (pkgs: {
-        # nix shell .#devShells.x86_64-linux.flake
-        flake =
+        # for plugins update script
+        default =
           let py = pkgs.python3.withPackages (p: with p; [ gitpython requests types-requests ruamel-yaml toml ]);
           in pkgs.mkShell {
-            propagatedBuildInputs = [ py ];
-            MYPYPATH = "${py}/${py.sitePackages}";
-          };
-        # nix develop
-        default =
-          let py = pkgs.python3.withPackages (p: [ pkgs.python3Packages.maubot ]);
-          in pkgs.mkShell {
-            propagatedBuildInputs = [ py ];
+            nativeBuildInputs = [
+              py
+              pkgs.git
+              pkgs.nurl
+            ];
             MYPYPATH = "${py}/${py.sitePackages}";
           };
       });
