@@ -9,7 +9,7 @@
 let
   python = python3.override {
     packageOverrides = self: super: {
-      aiosqlite = super.aiosqlite.overrideAttrs (old: rec {
+      aiosqlite = super.aiosqlite.overridePythonAttrs (old: rec {
         version = "0.18.0";
         src = old.src.override {
           rev = "refs/tags/v${version}";

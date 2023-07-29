@@ -417,9 +417,9 @@ in
         fi
       '';
     };
-    systemd.services.maubot = {
+    systemd.services.maubot = rec {
       description = "maubot - a plugin-based Matrix bot system written in Python";
-      after = [ "network.target" ] ++ lib.optional hasLocalPostgresDB "postgresql.service";
+      after = [ "network.target" ] ++ requires ++ lib.optional hasLocalPostgresDB "postgresql.service";
       # reasoning: all plugins get disabled if maubot starts before synapse
       requires = lib.optional config.services.matrix-synapse.enable "matrix-synapse.service";
       wantedBy = [ "multi-user.target" ];
