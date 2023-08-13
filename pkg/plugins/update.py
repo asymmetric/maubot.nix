@@ -38,6 +38,7 @@ def process_repo(path, official):
     origurl = repourl
     if '/' in name or ' ' in name:
         name = os.path.split(p)[-1].removesuffix('.yaml')
+    name = name.replace('_', '-')
     if name in plugins:
         raise ValueError(f'Duplicate plugin {name}, refusing to continue')
     repodir = f'/tmp/maubot-plugins/{name}'

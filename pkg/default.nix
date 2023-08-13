@@ -8,8 +8,8 @@
 
 let
   python = python3.override {
-    packageOverrides = self: super: {
-      aiosqlite = super.aiosqlite.overridePythonAttrs (old: rec {
+    packageOverrides = final: prev: {
+      aiosqlite = prev.aiosqlite.overridePythonAttrs (old: rec {
         version = "0.18.0";
         src = old.src.override {
           rev = "refs/tags/v${version}";
@@ -22,21 +22,29 @@ let
         doCheck = false;
       });
       # <0.20
-      mautrix = super.mautrix.overridePythonAttrs (old: rec {
+      mautrix = prev.mautrix.overridePythonAttrs (old: rec {
         version = "0.19.16";
-        disabled = super.pythonOlder "3.8";
-        checkInputs = old.checkInputs ++ [ self.sqlalchemy ];
+        disabled = prev.pythonOlder "3.8";
+        checkInputs = old.checkInputs ++ [ final.sqlalchemy ];
         SQLALCHEMY_SILENCE_UBER_WARNING = true;
         src = old.src.override {
           rev = "refs/tags/v${version}";
           hash = "sha256-aZlc4+J5Q+N9qEzGUMhsYguPdUy+E5I06wrjVyqvVDk=";
         };
       });
-      sqlalchemy = super.buildPythonPackage rec {
+      # runtime error with new ruamel-yaml
+      ruamel-yaml = prev.ruamel-yaml.overridePythonAttrs (prev: rec {
+        version = "0.17.21";
+        src = prev.src.override {
+          version = version;
+          hash = "sha256-i3zml6LyEnUqNcGsQURx3BbEJMlXO+SSa1b/P10jt68=";
+        };
+      });
+      sqlalchemy = final.buildPythonPackage rec {
         pname = "SQLAlchemy";
         version = "1.3.24";
 
-        src = super.fetchPypi {
+        src = final.fetchPypi {
           inherit pname version;
           sha256 = "sha256-67t3fL+TEjWbiXv4G6ANrg9ctp+6KhgmXcwYpvXvdRk=";
         };

@@ -793,6 +793,37 @@
       "main_class": "AlternatingCaps"
     }
   },
+  "animemanga": {
+    "attrs": {
+      "postPatch": "cd animemanga",
+      "meta": {
+        "description": "Search anime, manga (manhwa/manhua), and light novels from Anilist. See series info, status, and episodes/chapters.",
+        "homepage": "https://github.com/coffeebank/coffee-maubot/tree/master/animemanga",
+        "downloadPage": "https://github.com/coffeebank/coffee-maubot/releases",
+        "changelog": "https://github.com/coffeebank/coffee-maubot/releases"
+      }
+    },
+    "github": {
+      "owner": "coffeebank",
+      "repo": "coffee-maubot",
+      "rev": "d6b74be70c481a9b6e58d7251ff2c4e1ce3a5e96",
+      "hash": "sha256-GWycsjFy1+pkwDLeXAwz+4ZIMnfHW+c7CGxW85rlMFk="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "coffee.maubot.animemanga",
+      "version": "0.1.1.211",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "animemanga"
+      ],
+      "main_class": "AnimeMangaBot",
+      "database": false,
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    }
+  },
   "autoreply": {
     "attrs": {
       "meta": {
@@ -853,6 +884,34 @@
       "extra_files": [
         "base-config.yaml"
       ],
+      "database": false
+    }
+  },
+  "choose": {
+    "attrs": {
+      "postPatch": "cd choose",
+      "meta": {
+        "description": "Have the bot choose for you ( item1 | item2 | item3 ) with a divider",
+        "homepage": "https://github.com/coffeebank/coffee-maubot/tree/master/choose",
+        "downloadPage": "https://github.com/coffeebank/coffee-maubot/releases",
+        "changelog": "https://github.com/coffeebank/coffee-maubot/releases"
+      }
+    },
+    "github": {
+      "owner": "coffeebank",
+      "repo": "coffee-maubot",
+      "rev": "d6b74be70c481a9b6e58d7251ff2c4e1ce3a5e96",
+      "hash": "sha256-GWycsjFy1+pkwDLeXAwz+4ZIMnfHW+c7CGxW85rlMFk="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "coffee.maubot.choose",
+      "version": "0.1.0.3",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "choose"
+      ],
+      "main_class": "ChooseBot",
       "database": false
     }
   },
@@ -1142,7 +1201,7 @@
       "config": true
     }
   },
-  "local_stt": {
+  "local-stt": {
     "attrs": {
       "meta": {
         "description": "A Maubot to transcribe audio messages in matrix rooms using local open-source libraries",
@@ -1757,13 +1816,13 @@
     "github": {
       "owner": "coffeebank",
       "repo": "coffee-maubot",
-      "rev": "7d75c7b4c069ecf4f0c1ba944fb5e235a6143a26",
-      "hash": "sha256-dFRt+v5sSuuAW60oLvm1WfdcraQYzkYUH6iJciGTiwI="
+      "rev": "d6b74be70c481a9b6e58d7251ff2c4e1ce3a5e96",
+      "hash": "sha256-GWycsjFy1+pkwDLeXAwz+4ZIMnfHW+c7CGxW85rlMFk="
     },
     "manifest": {
       "maubot": "0.1.0",
       "id": "coffee.maubot.urlpreview",
-      "version": "0.1.0.35",
+      "version": "0.1.3.2",
       "license": "AGPL-3.0-or-later",
       "modules": [
         "urlpreview"

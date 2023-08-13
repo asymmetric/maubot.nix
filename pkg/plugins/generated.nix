@@ -26,9 +26,9 @@ let
           whispercpp = ./whispercpp.nix;
         };
         ignorePackages = {
-          # too annoying to build as they vendor a lot of stuff, and it's optional for the local_stt plugin
+          # too annoying to build as they vendor a lot of stuff, and it's optional for the local-stt plugin
           vosk = null;
-          # not actually needed
+          # not actually needed since it's always installed for maubot plugins
           maubot = null;
         };
       in
