@@ -236,7 +236,7 @@ in
                   '';
                 };
                 port = mkOption {
-                  type = types.int;
+                  type = types.port;
                   default = 29316;
                   description = mdDoc ''
                     The port to listen on
