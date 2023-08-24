@@ -111,14 +111,14 @@ in
       description = mdDoc ''
         A file for storing secrets. You can pass homeserver registration keys here.
         If it already exists, **it must contain `server.unshared_secret`** which is used for signing API keys.
-        If `extraConfigFileWritable` is not set to true, **maubot user must have write access to this file**.
+        If `configMutable` is not set to true, **maubot user must have write access to this file**.
       '';
     };
-    extraConfigFileWritable = mkOption {
+    configMutable = mkOption {
       type = types.bool;
       default = false;
       description = mdDoc ''
-        Whether maubot should write updated config into `extraConfigFile`. **This will make your Nix module settings have no effect, as extraConfigFile takes precedence over NixOS settings!** It is recommended to keep this off, or enable this for a short time only. Make sure to remove extra config from your file after settings.
+        Whether maubot should write updated config into `extraConfigFile`. **This will make your Nix module settings have no effect besides the initial config, as extraConfigFile takes precedence over NixOS settings!**
       '';
     };
     settings = mkOption {
@@ -428,7 +428,7 @@ in
         Group = "maubot";
         WorkingDirectory = cfg.dataDir;
       };
-      script = "${finalPackage}/bin/maubot --base-config ${configFile} --config ${cfg.extraConfigFile}" + lib.optionalString (!cfg.extraConfigFileWritable) " --no-update";
+      script = "${finalPackage}/bin/maubot --base-config ${configFile} --config ${cfg.extraConfigFile}" + lib.optionalString (!cfg.configMutable) " --no-update";
     };
     # TODO touch extraConfigFile?
   };
