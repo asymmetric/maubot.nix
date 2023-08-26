@@ -405,24 +405,18 @@ in
     users.groups.maubot = {
       # gid = 350; # config.ids.gids.maubot;
     };
-    system.userActivationScripts.maubotInit = {
-      text = ''
-        if [[ "$(whoami)" == maubot ]]; then
-          pushd ~
-          if [ ! -f "${cfg.extraConfigFile}" ]; then
-            echo "server:" > "${cfg.extraConfigFile}"
-            echo "    unshared_secret: $(head -c40 /dev/random | base32 | awk '{print tolower($0)}')" > "${cfg.extraConfigFile}"
-          fi
-          popd
-        fi
-      '';
-    };
     systemd.services.maubot = rec {
       description = "maubot - a plugin-based Matrix bot system written in Python";
       after = [ "network.target" ] ++ requires ++ lib.optional hasLocalPostgresDB "postgresql.service";
       # reasoning: all plugins get disabled if maubot starts before synapse
       requires = lib.optional config.services.matrix-synapse.enable "matrix-synapse.service";
       wantedBy = [ "multi-user.target" ];
+      preStart = ''
+        if [ ! -f "${cfg.extraConfigFile}" ]; then
+          echo "server:" > "${cfg.extraConfigFile}"
+          echo "    unshared_secret: $(head -c40 /dev/random | base32 | awk '{print tolower($0)}')" > "${cfg.extraConfigFile}"
+        fi
+      '';
       serviceConfig = {
         User = "maubot";
         Group = "maubot";
