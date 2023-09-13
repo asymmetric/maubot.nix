@@ -797,7 +797,7 @@
     "attrs": {
       "postPatch": "cd animemanga",
       "meta": {
-        "description": "Search anime, manga (manhwa/manhua), and light novels from Anilist. See series info, status, and episodes/chapters.",
+        "description": "An anime/manga bot for Matrix. Search anime, manga (manhwa/manhua), and light novels from Anilist. See series info, status, and episodes/chapters.",
         "homepage": "https://github.com/coffeebank/coffee-maubot/tree/master/animemanga",
         "downloadPage": "https://github.com/coffeebank/coffee-maubot/releases",
         "changelog": "https://github.com/coffeebank/coffee-maubot/releases"
@@ -806,8 +806,8 @@
     "github": {
       "owner": "coffeebank",
       "repo": "coffee-maubot",
-      "rev": "d6b74be70c481a9b6e58d7251ff2c4e1ce3a5e96",
-      "hash": "sha256-GWycsjFy1+pkwDLeXAwz+4ZIMnfHW+c7CGxW85rlMFk="
+      "rev": "4ceaf1c4c72d81eeb853f59ac5bf52bb4355aab3",
+      "hash": "sha256-zBZ/FF4J0Ix4/iArg4hZmQ0Yn9jlMNO9dc9diATNw9U="
     },
     "manifest": {
       "maubot": "0.1.0",
@@ -900,8 +900,8 @@
     "github": {
       "owner": "coffeebank",
       "repo": "coffee-maubot",
-      "rev": "d6b74be70c481a9b6e58d7251ff2c4e1ce3a5e96",
-      "hash": "sha256-GWycsjFy1+pkwDLeXAwz+4ZIMnfHW+c7CGxW85rlMFk="
+      "rev": "4ceaf1c4c72d81eeb853f59ac5bf52bb4355aab3",
+      "hash": "sha256-zBZ/FF4J0Ix4/iArg4hZmQ0Yn9jlMNO9dc9diATNw9U="
     },
     "manifest": {
       "maubot": "0.1.0",
@@ -1130,6 +1130,37 @@
         "invite"
       ],
       "main_class": "Invite",
+      "database": false,
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    }
+  },
+  "jadict": {
+    "attrs": {
+      "postPatch": "cd jadict",
+      "meta": {
+        "description": "A Japanese dictionary Matrix bot for searching and translating Japanese vocabulary (Hiragana, Katakana, Kanji, Romaji). Searches Jisho using Jisho API.",
+        "homepage": "https://github.com/coffeebank/coffee-maubot/tree/master/jadict",
+        "downloadPage": "https://github.com/coffeebank/coffee-maubot/releases",
+        "changelog": "https://github.com/coffeebank/coffee-maubot/releases"
+      }
+    },
+    "github": {
+      "owner": "coffeebank",
+      "repo": "coffee-maubot",
+      "rev": "4ceaf1c4c72d81eeb853f59ac5bf52bb4355aab3",
+      "hash": "sha256-zBZ/FF4J0Ix4/iArg4hZmQ0Yn9jlMNO9dc9diATNw9U="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "coffee.maubot.jadict",
+      "version": "0.1.0.10",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "jadict"
+      ],
+      "main_class": "JadictBot",
       "database": false,
       "extra_files": [
         "base-config.yaml"
@@ -1509,6 +1540,37 @@
       ]
     }
   },
+  "send-custom-html": {
+    "attrs": {
+      "postPatch": "cd send-custom-html",
+      "meta": {
+        "description": "Have the bot send a message as custom HTML. Test and preview formatted HTML body in Matrix.",
+        "homepage": "https://github.com/coffeebank/coffee-maubot/tree/master/send-custom-html",
+        "downloadPage": "https://github.com/coffeebank/coffee-maubot/releases",
+        "changelog": "https://github.com/coffeebank/coffee-maubot/releases"
+      }
+    },
+    "github": {
+      "owner": "coffeebank",
+      "repo": "coffee-maubot",
+      "rev": "4ceaf1c4c72d81eeb853f59ac5bf52bb4355aab3",
+      "hash": "sha256-zBZ/FF4J0Ix4/iArg4hZmQ0Yn9jlMNO9dc9diATNw9U="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "coffee.maubot.sendcustomhtml",
+      "version": "0.1.0.6",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "sendcustomhtml"
+      ],
+      "main_class": "SendCustomHtmlBot",
+      "database": false,
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    }
+  },
   "social-media-download": {
     "attrs": {
       "meta": {
@@ -1521,13 +1583,13 @@
     "github": {
       "owner": "ggogel",
       "repo": "SocialMediaDownloadMaubot",
-      "rev": "1.0.0",
-      "hash": "sha256-0jcR36hyG+OIZn5ipS+B3aGVeNhnS/Y4fShoQ2IaPdk="
+      "rev": "1.1.1",
+      "hash": "sha256-7y4yQI5ljymYT+NAoUlh+qe6+x07M9FVFnKru7U1V8k="
     },
     "manifest": {
       "maubot": "0.1.0",
       "id": "me.gogel.maubot.socialmediadownload",
-      "version": "1.0.0",
+      "version": "1.1.1",
       "license": "MIT",
       "modules": [
         "instaloader",
@@ -1598,6 +1660,38 @@
       "database": false,
       "extra_files": [
         "base-config.yaml"
+      ]
+    }
+  },
+  "timein": {
+    "attrs": {
+      "postPatch": "cd timein",
+      "meta": {
+        "description": "Get the time in specific cities. Check timezones.  !timein New York  (Python 3.9+) (Python <3.9 requires pytz, fuzzywuzzy)",
+        "homepage": "https://github.com/coffeebank/coffee-maubot/tree/master/timein",
+        "downloadPage": "https://github.com/coffeebank/coffee-maubot/releases",
+        "changelog": "https://github.com/coffeebank/coffee-maubot/releases"
+      }
+    },
+    "github": {
+      "owner": "coffeebank",
+      "repo": "coffee-maubot",
+      "rev": "4ceaf1c4c72d81eeb853f59ac5bf52bb4355aab3",
+      "hash": "sha256-zBZ/FF4J0Ix4/iArg4hZmQ0Yn9jlMNO9dc9diATNw9U="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "coffee.maubot.timein",
+      "version": "0.1.0.6",
+      "license": "AGPL-3.0-or-later",
+      "modules": [
+        "timein"
+      ],
+      "main_class": "TimeinBot",
+      "database": false,
+      "dependencies": [
+        "pytz",
+        "fuzzywuzzy"
       ]
     }
   },
@@ -1803,11 +1897,44 @@
       "main_class": "UrbanDictBot"
     }
   },
+  "URLDownload": {
+    "attrs": {
+      "meta": {
+        "description": "A plugin for the maubot bot framework implementing URL downloads in matrix rooms.",
+        "homepage": "https://codeberg.org/LukeLR/matrix-url-download",
+        "downloadPage": "https://codeberg.org/LukeLR/matrix-url-download/releases",
+        "changelog": "https://codeberg.org/LukeLR/matrix-url-download/releases"
+      }
+    },
+    "gitea": {
+      "domain": "codeberg.org",
+      "owner": "LukeLR",
+      "repo": "matrix-url-download",
+      "rev": "3a006d98faa6950edab1a45b7a8c6a6d7d908bff",
+      "hash": "sha256-JLYhoQKxsYO46mqRJZEcWTHck6bli6itYGu8ZPbxyjg="
+    },
+    "manifest": {
+      "maubot": "0.1.0",
+      "id": "de.lukelr.urldownload",
+      "version": "0.0.3",
+      "license": "LGPL-3.0-only",
+      "modules": [
+        "urldownload"
+      ],
+      "main_class": "URLDownloadBot",
+      "database": true,
+      "database_type": "asyncpg",
+      "config": true,
+      "extra_files": [
+        "base-config.yaml"
+      ]
+    }
+  },
   "urlpreview": {
     "attrs": {
       "postPatch": "cd urlpreview",
       "meta": {
-        "description": "A bot that responds to links with a link preview embed, using Matrix API to fetch meta tags.",
+        "description": "Add URL preview embeds to Matrix! A bot that responds to links with a link preview embed, using Matrix API to fetch meta tags. Supports fetching JSON previews.",
         "homepage": "https://github.com/coffeebank/coffee-maubot/tree/master/urlpreview",
         "downloadPage": "https://github.com/coffeebank/coffee-maubot/releases",
         "changelog": "https://github.com/coffeebank/coffee-maubot/releases"
@@ -1816,18 +1943,18 @@
     "github": {
       "owner": "coffeebank",
       "repo": "coffee-maubot",
-      "rev": "d6b74be70c481a9b6e58d7251ff2c4e1ce3a5e96",
-      "hash": "sha256-GWycsjFy1+pkwDLeXAwz+4ZIMnfHW+c7CGxW85rlMFk="
+      "rev": "4ceaf1c4c72d81eeb853f59ac5bf52bb4355aab3",
+      "hash": "sha256-zBZ/FF4J0Ix4/iArg4hZmQ0Yn9jlMNO9dc9diATNw9U="
     },
     "manifest": {
       "maubot": "0.1.0",
       "id": "coffee.maubot.urlpreview",
-      "version": "0.1.3.2",
+      "version": "0.3.2.64",
       "license": "AGPL-3.0-or-later",
       "modules": [
         "urlpreview"
       ],
-      "main_class": "UrlpreviewBot",
+      "main_class": "UrlPreviewBot",
       "database": false,
       "extra_files": [
         "base-config.yaml"
